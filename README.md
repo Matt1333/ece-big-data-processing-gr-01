@@ -1,9 +1,9 @@
 # ECE Big Data Processing – Fall 2026
 
-- Group: gr-XX
+- Group: gr-01
 - lab/project member 1: TOUVRON Erwan, `GITHUB_USERNAME_1`
 - lab/project member 2: PINTO Kylian, `GITHUB_USERNAME_2`
-- lab/project member 3: DAVIDSON Matt, `GITHUB_USERNAME_3`
+- lab/project member 3: DAVIDSON Matt, `Matt1333`
 
 ## Contents
 
