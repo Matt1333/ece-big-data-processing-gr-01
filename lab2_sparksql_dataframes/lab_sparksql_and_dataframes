@@ -9,7 +9,7 @@
       "source": [
         "# Exploratory Data Analysis with Pyspark and Spark SQL\n",
         "\n",
-        "The following notebook utilizes New York City taxi data from [TLC Trip Record Data](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page)\n",
+        "The following notebook utilizes New York city taxi data from [TLC Trip Record Data](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page)\n",
         "\n",
         "## Instructions\n",
         "\n",
@@ -179,7 +179,7 @@
         "- On average which day of the week is slowest/busiest\n",
         "- Does trip distance or num passangers affect tip amount\n",
         "- What was the highest \"extra\" charge and which trip\n",
-        "- Are there any datapoints that seem to be strange/outliers (make sure to explain your reasoning in a markdown cell)?"
+        "- Are there any datapoints that seem to be strange/outliers (make sure to explain your reasoning in a markdown cell)? "
       ]
     },
     {
@@ -1301,7 +1301,7 @@
         {
           "output_type": "error",
           "ename": "SyntaxError",
-          "evalue": "invalid syntax. Perhaps you forgot a comma? (1749233998.py, line 6)",
+          "evalue": "invalid syntax. Perhaps you forgot a comma? (1749233998.py, line 6) ",
           "traceback": [
             "\u001b[0;36m  File \u001b[0;32m\"/tmp/ipykernel_1625/1749233998.py\"\u001b[0;36m, line \u001b[0;32m6\u001b[0m\n\u001b[0;31m    print (\"df_joined.orderBy(F.col(\"fare_amount\").asc())\") \\\u001b[0m\n\u001b[0m           ^\u001b[0m\n\u001b[0;31mSyntaxError\u001b[0m\u001b[0;31m:\u001b[0m invalid syntax. Perhaps you forgot a comma?\n"
           ]
