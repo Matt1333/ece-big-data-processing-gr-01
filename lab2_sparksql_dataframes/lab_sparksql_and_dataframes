@@ -13,7 +13,7 @@
         "\n",
         "## Instructions\n",
         "\n",
-        "- Load and explore nyc taxi data from january 0f 2019. The exercises can be executed using pyspark or spark sql (a subset of the questions will be re-answered using the language not chosen for the  main work).\n",
+        "- Load and explore nyc taxi data from january 0f 2019. The exercises can be executed using pyspark or spark sql(a subset of the questions will be re-answered using the language not chosen for the  main work).\n",
         "- Load the zone lookup table to answer the questions about the nyc boroughs.  \n",
         "- Load nyc taxi data from January of 2025 and compare data.  \n",
         "- With any remaining time, work on the where to go from here section.\n",
@@ -1709,7 +1709,7 @@
         "id": "edf11bf1"
       },
       "source": [
-        "In 6 years the yellow taxi does 2 times less trips, but each trip is more expensive and with less people : the service became more individual and more expensive, and Uber took the short and shared trips."
+        "In 6 years the yellow taxi does 2 times less trips,but each trip is more expensive and with less people : the service became more individual and more expensive, and Uber took the short and shared trips."
       ]
     }
   ],
@@ -1728,3 +1728,5 @@
   "nbformat": 4,
   "nbformat_minor": 5
 }
+
+
