@@ -11,5 +11,7 @@
 |---|---|
 | `lab1_rdd_word_count/` | Lab 1 – Word count with RDDs (*Around the World in 80 Days*, EN vs FR) |
 | `lab2_sparksql_dataframes/` | Lab 2 – Structured data analysis with DataFrames and SparkSQL (NYC TLC taxi data) |
+| `lab3_kafka/` | Lab 3 – Kafka producer/topic/consumer with `confluent_kafka` (*Around the World in 80 Days* streamed line by line) |
 
 Notebooks are written for Google Colab / the `quay.io/jupyter/pyspark-notebook` Docker image.
+Lab 3 runs locally and needs a Kafka broker: `docker run -d --rm --name kafka_lab -p 9092:9092 apache/kafka-native:4.1.1`.
