@@ -13,6 +13,7 @@
 | `lab2_sparksql_dataframes/` | Lab 2 – Structured data analysis with DataFrames and SparkSQL (NYC TLC taxi data) |
 | `lab3_kafka/` | Lab 3 – Kafka producer/topic/consumer with `confluent_kafka` (*Around the World in 80 Days* streamed line by line) |
 | `lab4_structured_streaming/` | Lab 4 – Spark Structured Streaming on the Wikimedia event stream (tumbling and overlapping event-time windows) |
+| `lab5_kubernetes/` | Lab 5 – Kubernetes basics with minikube (parts 1-3, work in progress) |
 
 ## Note about lab 2
 
