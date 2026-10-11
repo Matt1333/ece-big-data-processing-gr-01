@@ -1,0 +1,5 @@
+# Keep unix line endings inside this project. Git on Windows converts to CRLF on checkout by
+# default, and a .sh file with CRLF fails in the linux container with "bad interpreter", while
+# a .py file with CRLF is fine but noisy in diffs. Forcing LF keeps the repo identical on the
+# three machines of the group.
+* text=auto eol=lf

@@ -1,0 +1,11 @@
+# Host dependencies, only for the two scripts that talk to the network: the wikipedia
+# download (04b) and the kafka producer (05a). Everything else runs inside the containers.
+#
+# Installed in a virtualenv kept OUTSIDE of the project folder, because the project folder is
+# synchronised by OneDrive and a virtualenv is thousands of small files.
+requests>=2.31
+confluent-kafka>=2.5
+pywikibot>=9.0
+# pywikibot needs it for EventStreams (the server sent events of the wikipedia stream)
+# and does not pull it in itself
+requests-sse>=0.5.0

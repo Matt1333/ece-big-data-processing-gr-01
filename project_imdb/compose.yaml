@@ -1,0 +1,65 @@
+# The compose project name is pinned. It defaults to the folder name, and the named
+# volume below is prefixed with it, so renaming or moving this folder would make docker
+# look for a volume that does not exist and silently create an empty one. Pinning it
+# keeps `projet-imdb_imdb_data`, where the dataset already sits.
+name: projet-imdb
+
+services:
+  kafka:
+    image: apache/kafka-native:4.1.1
+    container_name: imdb_kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: INTERNAL://0.0.0.0:19092,EXTERNAL://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:19092,EXTERNAL://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT,CONTROLLER:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+    networks:
+      - imdb-net
+
+  spark:
+    image: quay.io/jupyter/pyspark-notebook
+    container_name: imdb_spark
+    user: root
+    ports:
+      - "8888:8888"
+      - "4040:4040"
+    environment:
+      - NB_UID=${UID:-1000}
+      - NB_GID=${GID:-1000}
+      - CHOWN_EXTRA=/home/jovyan/work
+      - CHOWN_EXTRA_OPTS=-R
+      # the image ships spark in /usr/local/spark but doesn't put its python part on the path,
+      # so `import pyspark` fails. Same fix as the structured streaming lab.
+      - PYTHONPATH=/usr/local/spark/python:/usr/local/spark/python/lib/py4j-0.10.9.9-src.zip
+      - PYSPARK_PYTHON=/opt/conda/bin/python
+    volumes:
+      - ./:/home/jovyan/work
+      # the dataset is in a named docker volume and not in a folder of the host. Two reasons,
+      # both measured: reading the host filesystem from the container goes through a
+      # translation layer (21 MB/s against 49 MB/s on the volume), and the project folder is
+      # synchronised by OneDrive, which intercepts every one of the thousands of small files
+      # spark writes and can lock one while spark is still writing it.
+      - imdb_data:/home/jovyan/work/data
+      # the host folder stays visible read only, to load the dataset into the volume once
+      - ${DATA_DIR:-../imdb-data}:/mnt/host-data:ro
+    working_dir: /home/jovyan/work
+    networks:
+      - imdb-net
+    depends_on:
+      - kafka
+
+networks:
+  imdb-net:
+    driver: bridge
+
+volumes:
+  imdb_data:
