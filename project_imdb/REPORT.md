@@ -36,9 +36,44 @@ Source: `output/02_top5_missing/table.md`
 | name.basics | birthYear | 15716378 | 15033008 | 95.65 |
 | title.principals | job | 102181300 | 82476931 | 80.72 |
 
-<!-- TO WRITE: a high percentage is not automatically a problem. Say for each of these five
-     columns whether the emptiness is expected by the meaning of the column or whether it is a
-     real gap, and what it changes for the rest of the project. -->
+For the first column, we've got the attributes. So it's empty, but we know that this column was
+supposed to be empty, because a big part of the alternative titles doesn't need any qualificative
+word. It's just the title in another language. So this part is only useful when there is some
+particular case, and otherwise it's empty.
+
+Then we have the end year. So we were also waiting for an empty case, it's a structural
+emptiness. Why? Because a film doesn't have any year of end, so only the series and the
+miniseries have one. And sometimes not even them, because it is not explicitly said that a series
+is finished, so there is only the ones that are finished, for example Breaking Bad. The films are
+dominating the 12.8 million titles, and this is why end year is 98.73% empty: the films are the
+titles that are the most common in all the database.
+
+Then the death year. So the emptiness was expected, and in the big part of the cases it is
+because the person is still alive. But there is also a real gap, because for people that are dead
+and whose dates are not mentioned, we can't distinguish the two. Between a person that is dead
+whose date is not mentioned, and a person that is not dead, we cannot know. We can also say that
+the quality control found people that have a death date before they were born, so it means that
+we can't trust this date: even when it is filled, we can't say that it is 100% accurate and
+reliable.
+
+Then we've got the birth year. So this one is a real gap, and it's the most important one,
+because 95.65% on 15.7 million people means that we have the birth date only for 683 000 people.
+So IMDb only gives it for the well known persons, so not for the thousands and thousands of
+technicians, or just people that appear like one frame in a film for example. The consequence on
+the project is that we can't build anything based on the age. So that's why in the seventh
+question, which is on the careers that peak early, it measures the length of the career with the
+years of the films and not the age of the actor.
+
+Finally, for the job, it was an emptiness that we were waiting for, because the column category
+already says the work. So if someone is actor, director or writer, the job one is just a
+precision, and it's only filled for a certain type of people. Like for example an actor will have
+category equal to actor and the job will be empty, which is normal because we already said in the
+category that it was an actor and we have nothing to add, so that's why.
+
+So to conclude, four of the five columns are empty by construction, and none of the five are used
+for a project question. So the filling rate blocked none of our analyses. The only thing that
+cost us something is the birth year, because it closed the possibility for us to analyze people
+by their age, but we succeeded to find another way to analyze the data, so that's fine.
 
 ### 1.3 Other data quality issues
 
