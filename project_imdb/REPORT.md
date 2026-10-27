@@ -371,9 +371,42 @@ many things. We can't separate it from the film without losing some real matches
 
 ### 4.3 Handling of late arriving data
 
-<!-- TO WRITE. The subject explicitly asks for this one. Cover: event time vs processing time on
-     this stream, the watermark chosen and its duration, what spark does with an event that
-     arrives after the watermark, and what would happen without a watermark. -->
+So in this block we will talk about the time. The facts: there are two times. Wikipedia gives
+`meta.dt`, so the moment where the editing has been done, and this one is named the event time.
+And then there is another one, which is the moment where Kafka receives it: it is the processing
+time. These two are different, because an event can appear after the window that is attached to
+him has been reported.
+
+The watermark we chose is 10 minutes, declared on the event time. Spark accepts an event that is
+late if this event is within the 10 minutes after the max event time that has been reached, and
+then it throws away all the things that happen after these 10 minutes.
+
+So why 10 and not another number? It is because it is long enough for the normal delay of the
+stream, which is just a few seconds, but it is short enough so the state stays small in a test
+window, which is from 15 to 30 minutes.
+
+Without a watermark, Spark will keep the state of every window indefinitely, because it could
+never know when a window is finished. The memory would grow and it would never get down. That is
+also why the watermark has to be declared before every stateful operation.
+
+Then we have a technical constraint which is linked to this. It is the same thinking that imposed
+to us the `approx_count_distinct` instead of the `countDistinct` in the aggregation window: an
+exact distinct count on a stream would force us to memorize every ID that we have already seen,
+so the state would grow bigger and bigger with the traffic, without stopping or diminishing. It
+would always be bigger and more costly. Spark forbids it. So the exact number is recomputed after,
+in batch, on the parquet, where keeping everything in memory is not a matter.
+
+What we measured is that the mean of the delay is approximately minus 0.7 seconds, the minimum is
+minus 1 second, and the maximum is plus 6 seconds. So a negative delay is physically impossible:
+it would mean that we received the event before this event has been produced. So it is just a
+matter of clock gap between the Wikimedia server and the clock of the container. What is really
+said is that the latency is inferior to the second, so it is largely below the watermark of 10
+minutes, but the value itself is not a metric, because we can't comment minus 0.7 like it was a
+real result.
+
+So the consequence of this is that with a real latency below one second, none of the events has
+been removed by the watermark during the 18 minutes window. So the watermark is there for the
+correctness of the computation, and not because this stream is late.
 
 ### Methodological explanation - Streaming
 
