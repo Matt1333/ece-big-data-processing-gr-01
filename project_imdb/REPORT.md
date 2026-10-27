@@ -317,8 +317,52 @@ Jobs: `jobs/05a_wiki_producer.py`, `jobs/05b_streaming.py`
 
 ### 4.1 Filtering strategy
 
-<!-- TO WRITE: what subset of the stream is kept and why it is broad enough to guarantee several
-     matching events in a 15 to 30 minute window. -->
+So for this part, the facts that we have. The producer, which is the job
+`05a_wiki_producer.py`, reads the live stream of the modifications in Wikipedia, and it pushes
+everything that has been read into Kafka. Every edit of the English Wikipedia is sent to Kafka, so
+it means 3 to 5 things are sent every second. There is no filter at this level, and this is a
+choice, it is voluntary. The subject needs a criteria "sufficiently broad to guarantee that
+multiple matching events are captured and processed within a 15 to 30 minute test window". By
+keeping this whole stream on the producer side, it stays representative, and we can show how many
+events have been seen compared to how many have been matched.
+
+Why Wikipedia in English and not in French? Because the enrichment of the section 3 uses Wikipedia
+in English, so the pages that have the most chance to correspond are the film pages that are in
+English.
+
+The filtering is done by Spark with a join, and it is there that we reduce: we join the stream
+with a static reference built from the Parquet.
+
+There is a first fail, and it is the main point of our paragraph. In the first version, the
+reference contained only the entities that had been enriched in the section 3, so approximately
+17,000. Against 3 to 5 edits per second dispatched on millions of different articles, this aim of
+17,000 pages was never touched, because a run of 16 minutes matched no event. It means that the
+filter was too tight, and it was not aligned with the purpose of the subject.
+
+The measure that served to build the new reference was: for the movie only we have 758,864 lines,
+for the movie plus TV series plus TV miniseries we have 1,138,819 lines, and if we take all the
+people we have more than 15 million lines. So we only took the second option, which is the movie
+plus TV series plus TV miniseries, so around 66 times the first version. And we add to this the
+principals that have been enriched.
+
+Every people were voluntarily excluded, because 15 million lines are too expensive for our
+pipeline, and the real people that are edited are mainly the guys who are well known enough to be
+a principal actor of a film or a main character of the film.
+
+The primary title and the original title both become keys, because a Wikipedia article can be
+named on one or the other of the things that I mentioned just before, so it can be the primary
+title or the original title.
+
+And then the result that we measured on the test window. It has been running for 18 minutes, we
+have seen 5,280 events, and we have matched 215 of these events that we have seen. It means that
+it is around 4%, and we have 137 distinct entities. On this, we have 204 edits on titles and 11 on
+people. So the requirement of the subject is maintained, we have many matches in a window of 18
+minutes.
+
+But we have a limitation to accept: the exact correspondence on the normalized title produces some
+false positives when a page has the same name as a film. For example if a film is named Bruges, or
+if it is a simple word that is the same for a film and for a town, a country, a dish, it can be
+many things. We can't separate it from the film without losing some real matches.
 
 ### 4.2 Metrics of the test window
 
