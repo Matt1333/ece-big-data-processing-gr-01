@@ -497,7 +497,35 @@ Sources: `output/o4_summary/table.md`, `output/o1_best_duos/table.md`,
 
 ## Appendix - execution environment
 
-<!-- TO WRITE or complete: the machine, the container versions, the total runtime of each job. -->
+So for the machine and the container, it was a portable with four cores. The container limit was
+3.652 Gio of RAM. Spark was on local mode without any cluster, all the things run in the driver
+with a Java heap of 2500 megabytes. Two cores were given to Spark by default in order to let the
+machine usable, because it was very long and very powerful queries. 32 partitions of shuffle
+instead of 200 by default.
+
+The versions that have been used: PySpark 4.2.0, compiled against Scala 2.13, and Kafka
+apache/kafka-native 4.1.1 in KRaft mode, so without any zookeeper. The Kafka connector for Spark
+is `org.apache.spark:spark-sql-kafka-0-10_2.13:4.2.0`, that has been downloaded from Maven in the
+beginning of the session.
+
+Then finally, here is all the time that has been needed for this project. The job for the
+preparation, 80 minutes. For the exploration, from the first question to the fifth, 27 minutes.
+For the exploration, 6th question, 22 minutes. For the exploration, 7th and 8th question, 44
+minutes. For the select targets, 13 minutes. For the fetch Wikipedia, 15 minutes. The enrich
+Spark, 5 minutes. The streaming, 18 minutes. And the open question, 17 minutes. So in total, the
+Spark batch has been around 3 hours 30 minutes.
+
+So the volume has been 7 tables. The biggest one was title.principals with 102 million lines. Then
+title.akas with 59 million lines, then name.basics with 15 million, title.basics and title.crew
+with 12 million, and title.episode with a little bit less than 10 million, and finally
+title.ratings with 1.7 million. More than 40 gigabytes of shuffle traffic around the pipeline, and
+next to 15 gigabytes of free disk has been necessary on our computer.
+
+So of course all these lengths of time are for a local computer in two cores mode, because when we
+selected four cores the computer was unusable, so we chose to use only two cores, and they are not
+the ones of a cluster. The code contains nothing that makes it unusable on a real cluster, because
+it is the same Spark session and the same transformations, only the `.master()` line would have to
+be changed.
 
 | | |
 |---|---|
