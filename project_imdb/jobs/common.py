@@ -32,7 +32,7 @@ def get_spark(app_name, shuffle_partitions=32, driver_memory="2500m", packages=N
     which gives 200 very small tasks for each shuffle. But doing the opposite is worse: we have
     102 million rows in `title.principals`, and if we shuffle them into 8 partitions the tasks
     become too big for the heap. With 32 we stay around 3 million rows per task, it fits in
-    memory and we still use the 8 cores.
+    memory and we still use the cores we gave to spark (2 by default, 4 in `run_all.sh`).
 
     We put 2500m and not more: the container has 3.6 Go, and the jvm heap is not the only thing
     living inside. The python process, the off heap buffers and the os also need their place, so
@@ -135,4 +135,4 @@ def _fmt(v):
         return ""
     if isinstance(v, float):
         return f"{v:.2f}"
-    return str(v).replace("|", "\|").replace("\n", " ")
+    return str(v).replace("|", "\\|").replace("\n", " ")

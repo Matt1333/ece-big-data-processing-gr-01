@@ -7,7 +7,7 @@ cd "$(dirname "$0")"
 
 # The host dependencies live in a virtualenv kept outside the project folder, because the
 # project folder is synchronised by OneDrive and a virtualenv is thousands of small files.
-PY="${HOST_PYTHON:-/c/Users/mattd/.venvs/imdb-projet/Scripts/python.exe}"
+PY="${HOST_PYTHON:-$HOME/.venvs/imdb-projet/Scripts/python.exe}"
 [ -x "$PY" ] || { echo "host python not found: $PY (see PROJECT.md, setup step 2)"; exit 1; }
 
 echo "waiting for the targets of 04a..."

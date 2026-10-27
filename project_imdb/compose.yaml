@@ -26,7 +26,10 @@ services:
       - imdb-net
 
   spark:
-    image: quay.io/jupyter/pyspark-notebook
+    # pinned on purpose: the PYTHONPATH below names py4j-0.10.9.9, which is the version
+    # shipped with spark 4.2.0. On the floating `latest` tag a new spark would change that
+    # file name and `import pyspark` would stop working, on a machine where nothing moved.
+    image: quay.io/jupyter/pyspark-notebook:spark-4.2.0
     container_name: imdb_spark
     user: root
     ports:

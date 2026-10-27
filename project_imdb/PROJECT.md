@@ -74,7 +74,7 @@ The link and the list of files come from the [IMDb non-commercial datasets](http
 docker compose up -d
 ```
 
-This starts `imdb_spark` (the `quay.io/jupyter/pyspark-notebook` image, Spark 4.2.0) and
+This starts `imdb_spark` (the `quay.io/jupyter/pyspark-notebook:spark-4.2.0` image) and
 `imdb_kafka` (`apache/kafka-native:4.1.1` in KRaft mode). This folder is mounted in the Spark
 container on `/home/jovyan/work`, the dataset volume on `/home/jovyan/work/data`, and the folder
 from step 2 read only on `/mnt/host-data`. `01_ingest.py` copies the tsv from there into the
