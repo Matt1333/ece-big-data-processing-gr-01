@@ -1,0 +1,33 @@
+# the imdb dataset and everything derived from it: too big for git, rebuilt by the jobs
+data/
+output/**/*.parquet
+spark-warehouse/
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+
+# the texts downloaded from wikipedia: rebuilt by 04b, too big for git
+enriched/
+
+# local configuration: holds an absolute path of the machine, .env.example is the versioned one
+.env
+
+# execution logs: useful while running, noise in the repo. The measured durations are kept in
+# output/run_timings.md
+output/logs/
+
+# streaming internals: the checkpoint is spark's own restart state (hundreds of tiny files) and
+# the matching edits are a parquet rebuilt by a run. The figures that matter are in
+# output/s1_streaming_metrics, s2_matched_by_entity_type and s3_matched_edits_sample.
+output/streaming/
+
+# spark's own bookkeeping next to every output it writes
+_SUCCESS
+.*.crc
+
+# intermediate target lists, rebuilt by 04a_select_targets and consumed by 04b
+output/targets/
+
+# the repository root ignores *.txt (a rule inherited from the labs), which would hide the
+# list of host dependencies. It has to be versioned: PROJECT.md tells the reader to install it.
+!requirements-host.txt
