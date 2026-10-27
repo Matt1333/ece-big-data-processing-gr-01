@@ -22,7 +22,47 @@ Job: `jobs/02_preparation.py`
 
 Source: `output/01_missing_per_column/table.md`
 
-<!-- paste the table here -->
+| table_name | column_name | n_rows | n_missing | pct_missing |
+|---|---|---|---|---|
+| title.akas | attributes | 59668790 | 59353075 | 99.47 |
+| title.basics | endYear | 12846867 | 12684284 | 98.73 |
+| name.basics | deathYear | 15716378 | 15452135 | 98.32 |
+| name.basics | birthYear | 15716378 | 15033008 | 95.65 |
+| title.principals | job | 102181300 | 82476931 | 80.72 |
+| title.akas | types | 59668790 | 39940930 | 66.94 |
+| title.basics | runtimeMinutes | 12846867 | 8017609 | 62.41 |
+| title.principals | characters | 102181300 | 52353528 | 51.24 |
+| title.crew | writers | 12846867 | 6355076 | 49.47 |
+| title.crew | directors | 12846867 | 5715026 | 44.49 |
+| title.akas | language | 59668790 | 19468342 | 32.63 |
+| title.akas | region | 59668790 | 12887488 | 21.60 |
+| title.episode | seasonNumber | 9934901 | 2085819 | 20.99 |
+| title.episode | episodeNumber | 9934901 | 2085819 | 20.99 |
+| name.basics | primaryProfession | 15716378 | 3189614 | 20.29 |
+| name.basics | knownForTitles | 15716378 | 1901087 | 12.10 |
+| title.basics | startYear | 12846867 | 1484901 | 11.56 |
+| title.basics | genres | 12846867 | 544458 | 4.24 |
+| name.basics | primaryName | 15716378 | 88 | 0.00 |
+| name.basics | nconst | 15716378 | 0 | 0.00 |
+| title.akas | titleId | 59668790 | 0 | 0.00 |
+| title.akas | ordering | 59668790 | 0 | 0.00 |
+| title.akas | title | 59668790 | 0 | 0.00 |
+| title.akas | isOriginalTitle | 59668790 | 0 | 0.00 |
+| title.basics | tconst | 12846867 | 0 | 0.00 |
+| title.basics | titleType | 12846867 | 0 | 0.00 |
+| title.basics | primaryTitle | 12846867 | 0 | 0.00 |
+| title.basics | originalTitle | 12846867 | 0 | 0.00 |
+| title.basics | isAdult | 12846867 | 0 | 0.00 |
+| title.crew | tconst | 12846867 | 0 | 0.00 |
+| title.episode | tconst | 9934901 | 0 | 0.00 |
+| title.episode | parentTconst | 9934901 | 0 | 0.00 |
+| title.principals | tconst | 102181300 | 0 | 0.00 |
+| title.principals | ordering | 102181300 | 0 | 0.00 |
+| title.principals | nconst | 102181300 | 0 | 0.00 |
+| title.principals | category | 102181300 | 0 | 0.00 |
+| title.ratings | tconst | 1718390 | 0 | 0.00 |
+| title.ratings | averageRating | 1718390 | 0 | 0.00 |
+| title.ratings | numVotes | 1718390 | 0 | 0.00 |
 
 ### 1.2 The five columns with the highest percentage of nulls
 
@@ -79,13 +119,38 @@ by their age, but we succeeded to find another way to analyze the data, so that'
 
 Source: `output/03_quality_issues/table.md`
 
-<!-- paste the table here -->
+| table_name | issue | n_affected | unit |
+|---|---|---|---|
+| title.principals | nconst with no parent row | 3209 | distinct keys |
+| name.basics | deathYear before birthYear | 27 | rows |
+| title.basics | startYear more than 5 years in the future | 5 | rows |
+| title.basics | runtimeMinutes <= 0 | 4 | rows |
+| title.episode | parentTconst with no parent row | 4 | distinct keys |
+| name.basics | birthYear in the future | 0 | rows |
+| name.basics | birthYear not a number | 0 | rows |
+| name.basics | duplicated nconst | 0 | rows |
+| title.basics | endYear before startYear | 0 | rows |
+| title.basics | runtimeMinutes not a number | 0 | rows |
+| title.basics | startYear not a number | 0 | rows |
+| title.basics | duplicated tconst | 0 | rows |
+| title.ratings | tconst with no parent row | 0 | distinct keys |
+| title.akas | titleId with no parent row | 0 | distinct keys |
+| title.crew | tconst with no parent row | 0 | distinct keys |
+| title.episode | tconst with no parent row | 0 | distinct keys |
+| title.principals | tconst with no parent row | 0 | distinct keys |
+| title.ratings | duplicated tconst | 0 | rows |
 
 ### 1.4 How these values are handled
 
 Source: `output/04_rejected_rows/table.md`
 
-<!-- paste the table here -->
+| table_name | n_rows_raw | n_rows_clean | n_rows_rejected |
+|---|---|---|---|
+| title.ratings | 1718390 | 1718390 | 0 |
+| title.akas | 59668790 | 59668790 | 0 |
+| title.crew | 12846867 | 12846867 | 0 |
+| title.episode | 9934901 | 9934891 | 10 |
+| title.principals | 102181300 | 102174150 | 7150 |
 
 ### Methodological explanation - Data preparation
 
