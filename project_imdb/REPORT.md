@@ -410,9 +410,52 @@ correctness of the computation, and not because this stream is late.
 
 ### Methodological explanation - Streaming
 
-<!-- TO WRITE: the methodology, why it was chosen, the alternatives considered and the
-     trade-offs. In particular the stream-static join and the normalisation of both sides, and
-     why an exact match on a normalised key was preferred to a fuzzy match. -->
+So for this block, the first fail in the beginning was that the stream gives a title of a Wikipedia
+page, but our dataset gives titles of films and the names of the persons, and we have to link the
+two. So we have to link the title and the name of the people, and the two aren't written the same
+way, so it was quite difficult to link them.
+
+So how did we succeed to link them? We use the stream static join. We join the stream, that stays
+a stream, with a static data frame built from our Parquet dataset. Spark re-reads this static side
+at every micro batch, and that is why this side is put in cache: without the cache, every micro
+batch would rebuild all the plan from the parquet.
+
+And why didn't we use a broadcast for example? Because we have like 1.1 million lines, so it is
+very very big for an executor to diffuse it. So we use a normal join, and that is the price for
+this big reference. The `F.broadcast()` that we had in the beginning has been removed for this
+reason in particular.
+
+The normalization is identical on the both sides, so we put all the things in small letters, we
+throw away all the accents, and all the things that are not a letter or a number become a space.
+For example "WALL.E" becomes "wall e", and "Amélie" becomes "amelie", and it becomes the same key.
+Whereas two films that are different stay different. So it is just in order to be insensitive to
+the writing, and to be sure that a film is the right film and not another one.
+
+The central choice is exact on a normalized key, and not an approximative correspondence, because
+an approximative correspondence would bring the bad film silently, and we would have no way to
+know that it is not the right film but the false one, because the stream is too fast for us to
+read it, it is going at a very excessive pace. So with an exact correspondence it can also happen
+that it fails, but we can verify it and we can also anticipate it, for example the homonyms.
+
+We also have to deduplicate, so one line by key in the reference, because two films with the same
+title would duplicate every edit that corresponds. And we only have to know one thing, which is
+that the page concerns our dataset.
+
+The three requests launched in parallel are: every edit that corresponds, written in Parquet with
+a checkpoint, because it is what makes our job restartable without losing or duplicating any line.
+Then we count every window on the event time with the update mode, because it only shows the
+windows that are modified in the batch. And then finally the total volume seen, matched or not,
+because it is the denominator that proves that the filter is big enough.
+
+Finally we have a safeguard, `maxOffsetsPerTrigger`. It is a limit on what a micro batch swallows,
+because without this, a batch that is slow makes the next one read everything that has piled up so
+far, and the delay is going to be bigger and bigger.
+
+Finally, the compromise that we assume on the people. The 15.7 million people are all excluded
+from the reference, because including them would give more correspondences, but the cost of a join
+replayed at every micro batch against 15.7 million lines didn't justify that, it would be too big
+and too costly for us. And the people that are really edited are mainly the principals of films
+that have already been enriched.
 
 ---
 
