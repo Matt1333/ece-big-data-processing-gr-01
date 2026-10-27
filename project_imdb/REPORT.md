@@ -89,15 +89,50 @@ Source: `output/04_rejected_rows/table.md`
 
 ### Methodological explanation - Data preparation
 
-<!-- TO WRITE. The subject asks for: the methodology and why it was chosen, the alternatives
-     considered and the trade-offs made. Points you can cover:
-     - why two layers (`raw` as strings, then `clean` typed) instead of typing at ingest
-     - why tsv.gz -> parquet before anything else
-     - the policy: cast failure -> null, impossible value -> null but keep the row, orphan
-       foreign key -> removed but saved in output/rejected, duplicated primary key -> dropped
-     - the alternatives you rejected: dropping whole rows, guessing/imputing values, keeping
-       the orphans
-     - what this policy costs and what it protects -->
+So why this choice, and what choice we made. We know that we have two layers. The pipeline writes
+first a raw layer, where every column is a character string. Then there is a clean layer, which is
+typed and corrected. Why do we have two layers and not only one? Because if we typed right after
+the ingestion, a value impossible to cast would be transformed into null silently, and we couldn't
+measure what really missed in the process. So the raw layer is what makes the question 1.1
+measurable.
+
+Why we passed to the parquet format instead of CSV or any other structured data: because the TSV
+sources are in gzip, and gzip is not splittable. So Spark will read every file with only one task
+and needs to reparse the text at every job. Parquet is columnar, but it is also splittable and
+typed. So every request that needs for example three columns on 9 will only read these three
+columns.
+
+How we clean the data now, it's everywhere the same case. If the cast is impossible, we fill with
+the null value, because we will never try to guess a value. If the value is impossible, same
+thing, we will put the null value in it, but we will keep the line. Because we will not delete an
+entire person just because a date is wrong or anything else. So we prefer to have a missing date
+but the entire line still there, instead of deleting everything. If a foreign key is orphan, we
+will remove the line from the clean layer, because a join will lose it anyway, but its key will be
+saved in output rejected, in order that nothing disappears in silence. Then if a primary key is
+duplicated, we would have to handle it, but in our case none are duplicated, so we are fine in
+this case.
+
+To conclude on this part, the numbers. We have 39 columns measured, 18 quality controls, and 7160
+lines rejected. These rejected lines come from the orphan foreign keys: 3209 orphan nconst in
+title.principals, which represent 7150 lines, and 4 orphan parentTconst in title.episode, which
+represent 10 lines. The other problems are not rejected but set to null: 27 deaths before birth, 5
+impossible years, and 4 runtimes negative or null.
+
+The alternatives we rejected. The first one is to delete the entire line when a field is bad: we
+would lose millions of lines for a field that none of our questions were using, so it was useless.
+The second one is the imputation, so filling with the mean or the median. It creates data which
+does not exist, and on a quality report of data it is exactly what we are not supposed to do. And
+finally, keeping the orphans: they would be lost in the first join that they cross, and we could
+not count them.
+
+About our solution, there was a drop duplicates which was created at the beginning, but we removed
+it, because it was shuffling the whole table in order to delete nothing, and on title.basics this
+one single call was killing the driver, so it was very difficult. The control stays in the quality
+report, so a future IMDb dump that would introduce a duplicate would make it appear.
+
+In the same way, the filtering of the foreign keys is conditional: we first count the orphans,
+which shuffles only one narrow column, and we run the join only if there is really something to
+remove. On this dump, it avoids the join for every key except two.
 
 ---
 
