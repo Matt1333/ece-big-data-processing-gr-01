@@ -354,10 +354,9 @@ named on one or the other of the things that I mentioned just before, so it can 
 title or the original title.
 
 And then the result that we measured on the test window. It has been running for 18 minutes, we
-have seen 5,280 events, and we have matched 215 of these events that we have seen. It means that
-it is around 4%, and we have 137 distinct entities. On this, we have 204 edits on titles and 11 on
-people. So the requirement of the subject is maintained, we have many matches in a window of 18
-minutes.
+have seen 2,317 events, and we have matched 65 of these events. It means that this is around
+2.81%, and we have 41 distinct entities. On this, we have 54 edits on titles and 11 on people. So
+the requirement of the subject is maintained. We have many matches in a window of 18 minutes.
 
 But we have a limitation to accept: the exact correspondence on the normalized title produces some
 false positives when a page has the same name as a film. For example if a film is named Bruges, or
@@ -366,8 +365,111 @@ many things. We can't separate it from the film without losing some real matches
 
 ### 4.2 Metrics of the test window
 
-<!-- paste here the console output of the windows, and the figures: events seen, events matched,
-     average lag between event time and reception. -->
+Console output of the windowed query, excerpt of four consecutive micro batches (the Spark
+progress bars have been removed):
+
+```
+-------------------------------------------
+Batch: 8
+-------------------------------------------
++------------------------------------------+-----------+-------+-----------------+---------------+
+|window                                    |entity_type|n_edits|n_entities_approx|avg_lag_seconds|
++------------------------------------------+-----------+-------+-----------------+---------------+
+|{2026-10-29 10:50:00, 2026-10-29 10:55:00}|title      |10     |10               |0.8            |
++------------------------------------------+-----------+-------+-----------------+---------------+
+
+-------------------------------------------
+Batch: 9
+-------------------------------------------
++------------------------------------------+-----------+-------+-----------------+---------------+
+|window                                    |entity_type|n_edits|n_entities_approx|avg_lag_seconds|
++------------------------------------------+-----------+-------+-----------------+---------------+
+|{2026-10-29 10:50:00, 2026-10-29 10:55:00}|person     |5      |1                |0.8            |
+|{2026-10-29 10:50:00, 2026-10-29 10:55:00}|title      |11     |11               |0.8            |
++------------------------------------------+-----------+-------+-----------------+---------------+
+
+-------------------------------------------
+Batch: 10
+-------------------------------------------
++------------------------------------------+-----------+-------+-----------------+---------------+
+|window                                    |entity_type|n_edits|n_entities_approx|avg_lag_seconds|
++------------------------------------------+-----------+-------+-----------------+---------------+
+|{2026-10-29 10:50:00, 2026-10-29 10:55:00}|person     |6      |1                |0.8            |
+|{2026-10-29 10:50:00, 2026-10-29 10:55:00}|title      |12     |12               |0.8            |
++------------------------------------------+-----------+-------+-----------------+---------------+
+
+-------------------------------------------
+Batch: 11
+-------------------------------------------
++------------------------------------------+-----------+-------+-----------------+---------------+
+|window                                    |entity_type|n_edits|n_entities_approx|avg_lag_seconds|
++------------------------------------------+-----------+-------+-----------------+---------------+
+|{2026-10-29 10:55:00, 2026-10-29 11:00:00}|title      |3      |3                |0.3            |
++------------------------------------------+-----------+-------+-----------------+---------------+
+
+... and the query that counts everything the stream carried, matched or not:
+
+-------------------------------------------
+Batch: 5
+-------------------------------------------
++------------------------------------------+--------------+
+|window                                    |n_events_total|
++------------------------------------------+--------------+
+|{2026-10-29 10:50:00, 2026-10-29 10:55:00}|488           |
++------------------------------------------+--------------+
+
+-------------------------------------------
+Batch: 6
+-------------------------------------------
++------------------------------------------+--------------+
+|window                                    |n_events_total|
++------------------------------------------+--------------+
+|{2026-10-29 10:50:00, 2026-10-29 10:55:00}|603           |
++------------------------------------------+--------------+
+```
+
+Figures of the run, from `output/s1_streaming_metrics/table.md`:
+
+| window_minutes | events_seen | events_matched | pct_matched | distinct_entities_touched | avg_lag_seconds | min_lag_seconds | max_lag_seconds |
+|---|---|---|---|---|---|---|---|
+| 18 | 2317 | 65 | 2.81 | 41 | 0.80 | 0 | 1 |
+
+Matched edits by entity type, from `output/s2_matched_by_entity_type/table.md`:
+
+| entity_type | n_edits | n_entities | avg_lag_seconds |
+|---|---|---|---|
+| title | 54 | 39 | 0.80 |
+| person | 11 | 2 | 0.80 |
+
+Sample of the matched edits, from `output/s3_matched_edits_sample/table.md`:
+
+| event_time | title | label | entity_type | imdb_id | user | bot | lag_seconds |
+|---|---|---|---|---|---|---|---|
+| 2026-10-29 11:06:56.079000 | You're Next | You're Next | title | tt1853739 | Wikidude10000 | False | 0 |
+| 2026-10-29 11:06:45.493000 | Panchavati | Panchavati | title | tt0156866 | ~2026-57234-52 | False | 1 |
+| 2026-10-29 11:05:47.320000 | Panchavati | Panchavati | title | tt0156866 | Brboize | False | 1 |
+| 2026-10-29 11:05:18.383000 | Mañón | Manon | title | tt6423434 | Cie tsy-yin | False | 1 |
+| 2026-10-29 11:04:56.722000 | Pechino Express | Pechino Express | title | tt4944488 | Kazanl00k | False | 1 |
+| 2026-10-29 11:04:24.778000 | Pinki Elli | Pinki Elli? | title | tt12670516 | Nirgathika | False | 1 |
+| 2026-10-29 11:04:18.210000 | Pechino Express | Pechino Express | title | tt4944488 | Kazanl00k | False | 0 |
+| 2026-10-29 11:03:51.207000 | Panchavati | Panchavati | title | tt0156866 | ~2026-57234-52 | False | 1 |
+| 2026-10-29 11:03:46.623000 | TENA | Tena | title | tt10936918 | Entranced98 | False | 1 |
+| 2026-10-29 11:03:13.440000 | Tetris | Tetris | title | tt1543151 | DuncanHill | False | 1 |
+| 2026-10-29 11:03:09.261000 | When Heroes Fly | When Heroes Fly | title | tt8220344 | ProfSamBJones | False | 1 |
+| 2026-10-29 11:02:37.578000 | JK Enum Nanbanin Vaazhkai | JK Enum Nanbanin Vaazhkai | title | tt3426294 | Kailash29792 | False | 1 |
+| 2026-10-29 11:02:36.463000 | Digital transformation | Digital Transformation | title | tt6836116 | Kuru | False | 1 |
+| 2026-10-29 11:01:33.989000 | Zorro, The Gay Blade | Zorro: The Gay Blade | title | tt0083366 | Carlotta2026 | False | 1 |
+| 2026-10-29 11:01:32.730000 | Pierre Richard | Pierre Richard | person | nm0007069 | Psychloppos | False | 1 |
+| 2026-10-29 11:01:31.953000 | Pechino Express | Pechino Express | title | tt4944488 | SuperFastSpellChecker | False | 1 |
+| 2026-10-29 11:01:06.810000 | Royal family | Royal Family | title | tt0251380 | MusikBot II | True | 1 |
+| 2026-10-29 11:00:58.037000 | The King in Yellow | The King in Yellow | title | tt25816248 | MusikBot II | True | 0 |
+| 2026-10-29 11:00:55.160000 | Tayo the Little Bus | Tayo, the Little Bus | title | tt3270208 | MusikBot II | True | 0 |
+| 2026-10-29 11:00:43.141000 | Lobotomy | Lobotomy | title | tt39314280 | MusikBot II | True | 0 |
+| 2026-10-29 11:00:13.795000 | VisionQuest | VisionQuest | title | tt23112594 | MillenniumGeneration | False | 1 |
+| 2026-10-29 11:00:07.253000 | The Wind in the Willows | The Wind in the Willows | title | tt7657564 | Strongshorts | False | 0 |
+| 2026-10-29 10:59:59.813000 | 1916 | 1916 | title | tt3592380 | Rcb1 | False | 1 |
+| 2026-10-29 10:59:55.417000 | Panchavati | Panchavati | title | tt0156866 | ~2026-57234-52 | False | 1 |
+| 2026-10-29 10:59:35.658000 | The Wind in the Willows | The Wind in the Willows | title | tt7657564 | ~2026-56479-14 | False | 1 |
 
 ### 4.3 Handling of late arriving data
 
@@ -396,17 +498,15 @@ so the state would grow bigger and bigger with the traffic, without stopping or 
 would always be bigger and more costly. Spark forbids it. So the exact number is recomputed after,
 in batch, on the parquet, where keeping everything in memory is not a matter.
 
-What we measured is that the mean of the delay is approximately minus 0.7 seconds, the minimum is
-minus 1 second, and the maximum is plus 6 seconds. So a negative delay is physically impossible:
-it would mean that we received the event before this event has been produced. So it is just a
-matter of clock gap between the Wikimedia server and the clock of the container. What is really
-said is that the latency is inferior to the second, so it is largely below the watermark of 10
-minutes, but the value itself is not a metric, because we can't comment minus 0.7 like it was a
-real result.
+What we measure is that the mean of the delay is approximately 0.80 seconds. The minimum is 0
+second and the maximum is 1 second. We have no negative value.
 
-So the consequence of this is that with a real latency below one second, none of the events has
-been removed by the watermark during the 18 minutes window. So the watermark is there for the
-correctness of the computation, and not because this stream is late.
+So the first campaign gives us a negative lag, but we understood that it was a delay on the clock,
+so we retry it on an empty topic, and the proper measure was between 0 and 1 second. So my
+explanation was demonstrated and not supposed. So we confirmed that it was a mistake.
+
+So the watermark is there in order to correct the computation, and not because the stream is
+late.
 
 ### Methodological explanation - Streaming
 
