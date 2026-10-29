@@ -22,6 +22,10 @@ sys.path.insert(0, "/home/jovyan/work/jobs")
 from common import get_spark, read, save_result, PARQUET, OUTPUT, TABLES
 
 CURRENT_YEAR = 2026
+# the accepted ranges. They are named once and used both by the quality report and by the
+# clean layer, so a value we erase is always a value we also counted.
+BIRTH_YEARS = (1700, CURRENT_YEAR)
+RELEASE_YEARS = (1870, CURRENT_YEAR + 5)
 
 
 # --------------------------------------------------------------------------- 1. missing values
@@ -74,8 +78,10 @@ def quality_issues(spark):
     n = names.agg(
         F.count(F.when(F.col("deathYear").cast("int") < F.col("birthYear").cast("int"), 1))
         .alias("death_before_birth"),
-        F.count(F.when(F.col("birthYear").cast("int") > CURRENT_YEAR, 1))
+        F.count(F.when(F.col("birthYear").cast("int") > BIRTH_YEARS[1], 1))
         .alias("birth_in_future"),
+        F.count(F.when(F.col("birthYear").cast("int") < BIRTH_YEARS[0], 1))
+        .alias("birth_too_old"),
         F.count(F.when(F.col("birthYear").isNotNull()
                        & F.col("birthYear").cast("int").isNull(), 1))
         .alias("birthYear_not_a_number"),
@@ -84,6 +90,7 @@ def quality_issues(spark):
     ).collect()[0]
     add("name.basics", "deathYear before birthYear", n["death_before_birth"])
     add("name.basics", "birthYear in the future", n["birth_in_future"])
+    add("name.basics", "birthYear before {0}".format(BIRTH_YEARS[0]), n["birth_too_old"])
     add("name.basics", "birthYear not a number", n["birthYear_not_a_number"])
     add("name.basics", "duplicated nconst", n["total"] - n["distinct_nconst"])
 
@@ -99,12 +106,15 @@ def quality_issues(spark):
         F.count(F.when(F.col("startYear").isNotNull()
                        & F.col("startYear").cast("int").isNull(), 1))
         .alias("start_not_a_number"),
-        F.count(F.when(F.col("startYear").cast("int") > CURRENT_YEAR + 5, 1))
+        F.count(F.when(F.col("startYear").cast("int") > RELEASE_YEARS[1], 1))
         .alias("start_far_future"),
+        F.count(F.when(F.col("startYear").cast("int") < RELEASE_YEARS[0], 1))
+        .alias("start_too_old"),
         F.count(F.lit(1)).alias("total"),
         F.countDistinct("tconst").alias("distinct_tconst"),
     ).collect()[0]
     add("title.basics", "endYear before startYear", b["end_before_start"])
+    add("title.basics", "startYear before {0}".format(RELEASE_YEARS[0]), b["start_too_old"])
     add("title.basics", "runtimeMinutes not a number", b["runtime_not_a_number"])
     add("title.basics", "runtimeMinutes <= 0", b["runtime_not_positive"])
     add("title.basics", "startYear not a number", b["start_not_a_number"])
@@ -183,10 +193,18 @@ def build_clean(spark):
         # a runtime of 0 or less is not a duration, and a year far after today is not a release
         .withColumn("runtimeMinutes",
                     F.when(F.col("runtimeMinutes") > 0, F.col("runtimeMinutes")))
-        .withColumn("startYear",
-                    F.when(F.col("startYear").between(1870, CURRENT_YEAR + 5), F.col("startYear")))
+        # an end before the start is impossible, but only when we really have the two years:
+        # a comparison against a null gives null in spark, and `F.when` would then erase an
+        # endYear which was perfectly good, only because the startYear was missing. And like
+        # for the death and the birth below, the comparison comes before the range filter, so
+        # it reads the startYear of the raw layer and not the one we may have rejected
+        # ourselves. Here the two sets do not overlap (0 endYear before startYear), so the
+        # order changes nothing on this dump, but the two blocks have to say the same thing.
         .withColumn("endYear",
-                    F.when(F.col("endYear") >= F.col("startYear"), F.col("endYear")))
+                    F.when(F.col("startYear").isNull()
+                           | (F.col("endYear") >= F.col("startYear")), F.col("endYear")))
+        .withColumn("startYear",
+                    F.when(F.col("startYear").between(*RELEASE_YEARS), F.col("startYear")))
         # genres is a list separated by commas, we keep the string and we add the array
         # version: almost every question of the exploration needs to explode it
         .withColumn("genres_array", F.split(F.col("genres"), ","))
@@ -200,12 +218,19 @@ def build_clean(spark):
         names
         .withColumn("birthYear", F.col("birthYear").cast("int"))
         .withColumn("deathYear", F.col("deathYear").cast("int"))
-        .withColumn("birthYear",
-                    F.when(F.col("birthYear").between(1700, CURRENT_YEAR), F.col("birthYear")))
         # a death before the birth: we cannot know which of the two values is wrong, so we
-        # drop only the death and we keep the person
+        # drop only the death and we keep the person. Two things matter in these four lines.
+        # First we compare only when the birth is there: `deathYear >= null` gives null, so
+        # without the isNull test we were erasing the death of everybody who has no birth year,
+        # and that is 95.65% of the people. Second this comparison comes *before* the range
+        # filter below, so it sees the birth year of the raw layer. In the other order a birth
+        # that we reject ourselves becomes null, the isNull branch lets its impossible death
+        # pass, and the 27 rows announced by the quality report become 9 rows really erased.
         .withColumn("deathYear",
-                    F.when(F.col("deathYear") >= F.col("birthYear"), F.col("deathYear")))
+                    F.when(F.col("birthYear").isNull()
+                           | (F.col("deathYear") >= F.col("birthYear")), F.col("deathYear")))
+        .withColumn("birthYear",
+                    F.when(F.col("birthYear").between(*BIRTH_YEARS), F.col("birthYear")))
         .withColumn("primaryProfession_array", F.split(F.col("primaryProfession"), ","))
         .withColumn("knownForTitles_array", F.split(F.col("knownForTitles"), ","))
     )
@@ -240,14 +265,20 @@ def build_clean(spark):
         total = df.count()
         kept = df
         for parent, col in keys:
-            n_orphans = (df.select(F.col(col).alias("k")).where(F.col("k").isNotNull())
-                           .distinct()
-                           .join(parent.select(F.col(col).alias("k")), "k", "left_anti")
-                           .count())
+            orphans = (df.select(F.col(col).alias("k")).where(F.col("k").isNotNull())
+                         .distinct()
+                         .join(parent.select(F.col(col).alias("k")), "k", "left_anti"))
+            orphans.cache()
+            n_orphans = orphans.count()
             if n_orphans == 0:
+                orphans.unpersist()
                 print(f"  {table}.{col}: no orphan key, filtering join skipped")
                 continue
             print(f"  {table}.{col}: {n_orphans} orphan keys, filtering")
+            # the keys themselves and not only their number, so an orphan can be looked at
+            (orphans.write.mode("overwrite")
+             .parquet(f"{OUTPUT}/rejected/{table}__{col}"))
+            orphans.unpersist()
             kept = kept.join(parent, col, "left_semi")
         kept.write.mode("overwrite").parquet(f"{PARQUET}/clean/{table}")
         n_kept = spark.read.parquet(f"{PARQUET}/clean/{table}").count()
