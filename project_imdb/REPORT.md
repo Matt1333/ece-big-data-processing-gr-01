@@ -122,6 +122,7 @@ Source: `output/03_quality_issues/table.md`
 | table_name | issue | n_affected | unit |
 |---|---|---|---|
 | title.principals | nconst with no parent row | 3209 | distinct keys |
+| name.basics | birthYear before 1700 | 377 | rows |
 | name.basics | deathYear before birthYear | 27 | rows |
 | title.basics | startYear more than 5 years in the future | 5 | rows |
 | title.basics | runtimeMinutes <= 0 | 4 | rows |
@@ -130,6 +131,7 @@ Source: `output/03_quality_issues/table.md`
 | name.basics | birthYear not a number | 0 | rows |
 | name.basics | duplicated nconst | 0 | rows |
 | title.basics | endYear before startYear | 0 | rows |
+| title.basics | startYear before 1870 | 0 | rows |
 | title.basics | runtimeMinutes not a number | 0 | rows |
 | title.basics | startYear not a number | 0 | rows |
 | title.basics | duplicated tconst | 0 | rows |
@@ -139,6 +141,8 @@ Source: `output/03_quality_issues/table.md`
 | title.episode | tconst with no parent row | 0 | distinct keys |
 | title.principals | tconst with no parent row | 0 | distinct keys |
 | title.ratings | duplicated tconst | 0 | rows |
+| title.crew | duplicated tconst | 0 | rows |
+| title.episode | duplicated tconst | 0 | rows |
 
 ### 1.4 How these values are handled
 
