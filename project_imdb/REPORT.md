@@ -213,49 +213,429 @@ Job: `jobs/03_exploration.py`
 
 Sources: `output/q1_runtime_outliers_per_genre/table.md`, `output/q1_runtime_outliers_top/table.md`
 
-<!-- paste the tables here -->
+`output/q1_runtime_outliers_per_genre/table.md`:
+
+| genre | n_outliers | genre_avg_runtime |
+|---|---|---|
+| Drama | 509 | 99.00 |
+| Thriller | 342 | 97.60 |
+| Romance | 324 | 100.60 |
+| Adventure | 294 | 95.70 |
+| Comedy | 292 | 95.20 |
+| Crime | 279 | 97.30 |
+| Action | 250 | 103.20 |
+| Horror | 215 | 90.70 |
+| Biography | 167 | 95.90 |
+| Western | 85 | 87.30 |
+| War | 83 | 98.50 |
+| Animation | 82 | 87.70 |
+| Adult | 70 | 83.30 |
+| History | 65 | 101.30 |
+| Family | 62 | 95.80 |
+| Fantasy | 61 | 96.50 |
+| Sci-Fi | 57 | 93.70 |
+| Musical | 41 | 102.00 |
+| Sport | 35 | 95.50 |
+| Music | 33 | 94.70 |
+| Mystery | 29 | 96.60 |
+| Documentary | 23 | 88.80 |
+| News | 17 | 85.70 |
+| Film-Noir | 3 | 82.70 |
+| Reality-TV | 1 | 100.00 |
+
+`output/q1_runtime_outliers_top/table.md`:
+
+| genre | primaryTitle | startYear | runtimeMinutes | genre_avg_runtime | z_score |
+|---|---|---|---|---|---|
+| Comedy | London EC1 | 2015 | 5460 | 95.20 | 192.41 |
+| Documentary | Logistics | 2012 | 51420 | 88.80 | 191.17 |
+| Drama | Hunger! | 2015 | 6000 | 99.00 | 161.74 |
+| Documentary | Ambiancé | 2020 | 43200 | 88.80 | 160.56 |
+| Drama | Matrjoschka | 2006 | 5700 | 99.00 | 153.51 |
+| Drama | London EC1 | 2015 | 5460 | 99.00 | 146.94 |
+| Documentary | Carnets Filmés (Liste Complète) | 2019 | 28643 | 88.80 | 106.34 |
+| Mystery | London EC1 | 2015 | 5460 | 96.60 | 105.08 |
+| Music | The Cure for Insomnia | 1987 | 5220 | 94.70 | 84.34 |
+| Drama | A 2nd generation film | 2013 | 3077 | 99.00 | 81.62 |
+| Drama | The Longest Most Meaningless Movie in the World | 1970 | 2880 | 99.00 | 76.22 |
+| Family | World Peace & Prayer Day | 2011 | 2400 | 95.80 | 72.21 |
+| Horror | 24 Hour Psycho | 1993 | 1440 | 90.70 | 64.67 |
+| Action | h36: | 2017 | 2160 | 103.20 | 62.67 |
+| Comedy | Azgrab: The Documentary | 2011 | 1669 | 95.20 | 56.44 |
+| Documentary | Modern Times Forever | 2011 | 14400 | 88.80 | 53.30 |
+| History | Saynatakuna: Masks | 2013 | 2905 | 101.30 | 51.49 |
+| Drama | A Twist of Fate | 1970 | 1970 | 99.00 | 51.28 |
+| History | The Longest Most Meaningless Movie in the World | 1970 | 2880 | 101.30 | 51.03 |
+| Fantasy | Burning of the Red Lotus Temple | 1928 | 1620 | 96.50 | 49.14 |
 
 ### 2.2 Top three genres per year, 1980-2025
 
 Source: `output/q2_top3_genres_per_year/table.md`
 
-<!-- paste the table here -->
+| startYear | genre | total_votes | n_films | avg_rating | rank |
+|---|---|---|---|---|---|
+| 1980 | Drama | 3149142 | 1062 | 6.14 | 1 |
+| 1980 | Adventure | 2474259 | 135 | 5.89 | 2 |
+| 1980 | Horror | 2057360 | 143 | 5.20 | 3 |
+| 1981 | Adventure | 2239899 | 151 | 6.10 | 1 |
+| 1981 | Drama | 1700038 | 1018 | 6.21 | 2 |
+| 1981 | Horror | 1264285 | 158 | 5.44 | 3 |
+| 1982 | Drama | 3061514 | 1107 | 6.16 | 1 |
+| 1982 | Sci-Fi | 2446143 | 51 | 5.48 | 2 |
+| 1982 | Action | 1866135 | 292 | 5.76 | 3 |
+| 1983 | Drama | 2907014 | 1130 | 6.17 | 1 |
+| 1983 | Action | 2018855 | 296 | 5.67 | 2 |
+| 1983 | Adventure | 1979090 | 158 | 5.70 | 3 |
+| 1984 | Action | 3655955 | 289 | 5.83 | 1 |
+| 1984 | Drama | 3013188 | 1112 | 6.17 | 2 |
+| 1984 | Adventure | 2921423 | 143 | 5.89 | 3 |
+| 1985 | Comedy | 4544735 | 617 | 5.89 | 1 |
+| 1985 | Adventure | 3397376 | 148 | 5.85 | 2 |
+| 1985 | Drama | 3067083 | 1069 | 6.18 | 3 |
+| 1986 | Drama | 3984021 | 1124 | 6.12 | 1 |
+| 1986 | Adventure | 2953968 | 161 | 5.84 | 2 |
+| 1986 | Comedy | 2775235 | 625 | 5.78 | 3 |
+| 1987 | Drama | 4118569 | 1223 | 6.11 | 1 |
+| 1987 | Comedy | 3671369 | 621 | 5.74 | 2 |
+| 1987 | Action | 2347744 | 417 | 5.48 | 3 |
+| 1988 | Drama | 4447852 | 1145 | 6.11 | 1 |
+| 1988 | Comedy | 4411726 | 615 | 5.80 | 2 |
+| 1988 | Action | 2698832 | 438 | 5.40 | 3 |
+| 1989 | Comedy | 4992922 | 661 | 5.89 | 1 |
+| 1989 | Drama | 3947171 | 1191 | 6.19 | 2 |
+| 1989 | Adventure | 2934726 | 166 | 5.65 | 3 |
+| 1990 | Drama | 6296515 | 1158 | 6.08 | 1 |
+| 1990 | Comedy | 4002606 | 622 | 5.86 | 2 |
+| 1990 | Crime | 3576348 | 354 | 5.74 | 3 |
+| 1991 | Drama | 5539422 | 1172 | 6.16 | 1 |
+| 1991 | Crime | 3657101 | 261 | 5.93 | 2 |
+| 1991 | Comedy | 3182481 | 620 | 5.91 | 3 |
+| 1992 | Drama | 4906417 | 1064 | 6.19 | 1 |
+| 1992 | Comedy | 4056778 | 613 | 5.85 | 2 |
+| 1992 | Crime | 3598468 | 283 | 5.88 | 3 |
+| 1993 | Drama | 8964212 | 1068 | 6.15 | 1 |
+| 1993 | Comedy | 4481088 | 553 | 5.83 | 2 |
+| 1993 | Crime | 3034272 | 287 | 5.74 | 3 |
+| 1994 | Drama | 15685341 | 1120 | 6.15 | 1 |
+| 1994 | Crime | 6483981 | 271 | 5.79 | 2 |
+| 1994 | Comedy | 5652685 | 628 | 5.82 | 3 |
+| 1995 | Drama | 12478831 | 1161 | 6.14 | 1 |
+| 1995 | Crime | 7735777 | 253 | 5.85 | 2 |
+| 1995 | Comedy | 6054490 | 585 | 5.92 | 3 |
+| 1996 | Drama | 7834640 | 1134 | 6.22 | 1 |
+| 1996 | Comedy | 4695666 | 656 | 5.91 | 2 |
+| 1996 | Crime | 4427858 | 244 | 5.93 | 3 |
+| 1997 | Drama | 12585945 | 1221 | 6.21 | 1 |
+| 1997 | Action | 6749406 | 336 | 5.51 | 2 |
+| 1997 | Comedy | 5590405 | 720 | 5.89 | 3 |
+| 1998 | Drama | 11746928 | 1252 | 6.18 | 1 |
+| 1998 | Comedy | 9829215 | 752 | 5.86 | 2 |
+| 1998 | Crime | 6203573 | 304 | 5.93 | 3 |
+| 1999 | Drama | 15462227 | 1369 | 6.15 | 1 |
+| 1999 | Comedy | 8199550 | 809 | 5.78 | 2 |
+| 1999 | Crime | 7156938 | 295 | 5.87 | 3 |
+| 2000 | Drama | 12985466 | 1461 | 6.13 | 1 |
+| 2000 | Comedy | 8312637 | 805 | 5.82 | 2 |
+| 2000 | Adventure | 6961266 | 141 | 5.58 | 3 |
+| 2001 | Drama | 14691996 | 1592 | 6.17 | 1 |
+| 2001 | Comedy | 9482449 | 885 | 5.91 | 2 |
+| 2001 | Adventure | 9217788 | 150 | 5.64 | 3 |
+| 2002 | Drama | 17011517 | 1636 | 6.21 | 1 |
+| 2002 | Adventure | 8661553 | 147 | 5.71 | 2 |
+| 2002 | Action | 8367253 | 391 | 5.64 | 3 |
+| 2003 | Drama | 13212672 | 1674 | 6.16 | 1 |
+| 2003 | Action | 11676594 | 367 | 5.60 | 2 |
+| 2003 | Comedy | 10728536 | 1022 | 5.92 | 3 |
+| 2004 | Drama | 16433938 | 1776 | 6.21 | 1 |
+| 2004 | Action | 11475251 | 411 | 5.64 | 2 |
+| 2004 | Comedy | 10915077 | 1030 | 5.86 | 3 |
+| 2005 | Drama | 13651473 | 1923 | 6.21 | 1 |
+| 2005 | Comedy | 10163033 | 1136 | 5.90 | 2 |
+| 2005 | Action | 9309870 | 388 | 5.54 | 3 |
+| 2006 | Drama | 20826699 | 2187 | 6.21 | 1 |
+| 2006 | Comedy | 11740614 | 1248 | 5.80 | 2 |
+| 2006 | Thriller | 8640222 | 421 | 5.38 | 3 |
+| 2007 | Drama | 18486744 | 2215 | 6.21 | 1 |
+| 2007 | Comedy | 11682777 | 1232 | 5.84 | 2 |
+| 2007 | Action | 8969972 | 433 | 5.60 | 3 |
+| 2008 | Drama | 17534308 | 2476 | 6.15 | 1 |
+| 2008 | Action | 13370132 | 498 | 5.46 | 2 |
+| 2008 | Comedy | 11299941 | 1402 | 5.75 | 3 |
+| 2009 | Drama | 17539610 | 2768 | 6.18 | 1 |
+| 2009 | Comedy | 13421962 | 1543 | 5.84 | 2 |
+| 2009 | Action | 12089824 | 594 | 5.55 | 3 |
+| 2010 | Drama | 17507340 | 2929 | 6.21 | 1 |
+| 2010 | Action | 13293003 | 672 | 5.65 | 2 |
+| 2010 | Adventure | 13132555 | 335 | 6.05 | 3 |
+| 2011 | Drama | 20665332 | 3151 | 6.20 | 1 |
+| 2011 | Action | 17112417 | 700 | 5.75 | 2 |
+| 2011 | Comedy | 13944108 | 1718 | 5.85 | 3 |
+| 2012 | Drama | 20025094 | 3262 | 6.27 | 1 |
+| 2012 | Action | 14473452 | 685 | 5.76 | 2 |
+| 2012 | Comedy | 11720782 | 1832 | 5.86 | 3 |
+| 2013 | Drama | 21833132 | 3606 | 6.24 | 1 |
+| 2013 | Action | 17088722 | 771 | 5.66 | 2 |
+| 2013 | Comedy | 14762998 | 1933 | 5.90 | 3 |
+| 2014 | Drama | 24445260 | 3777 | 6.25 | 1 |
+| 2014 | Action | 20882981 | 812 | 5.72 | 2 |
+| 2014 | Adventure | 17854073 | 516 | 6.11 | 3 |
+| 2015 | Drama | 20416777 | 3903 | 6.20 | 1 |
+| 2015 | Action | 15566469 | 847 | 5.60 | 2 |
+| 2015 | Adventure | 14118324 | 512 | 6.04 | 3 |
+| 2016 | Drama | 20805703 | 3933 | 6.20 | 1 |
+| 2016 | Action | 17144654 | 887 | 5.63 | 2 |
+| 2016 | Adventure | 12323963 | 528 | 5.97 | 3 |
+| 2017 | Drama | 20666996 | 4060 | 6.18 | 1 |
+| 2017 | Action | 16647977 | 909 | 5.66 | 2 |
+| 2017 | Comedy | 11259839 | 2126 | 5.80 | 3 |
+| 2018 | Drama | 17334745 | 4177 | 6.14 | 1 |
+| 2018 | Action | 15056468 | 888 | 5.58 | 2 |
+| 2018 | Adventure | 13290535 | 506 | 5.78 | 3 |
+| 2019 | Drama | 21901447 | 4241 | 6.10 | 1 |
+| 2019 | Action | 12299351 | 899 | 5.61 | 2 |
+| 2019 | Comedy | 12187761 | 2126 | 5.74 | 3 |
+| 2020 | Drama | 10419971 | 3147 | 6.00 | 1 |
+| 2020 | Comedy | 6479734 | 1547 | 5.68 | 2 |
+| 2020 | Action | 6103018 | 604 | 5.47 | 3 |
+| 2021 | Drama | 14303445 | 3584 | 6.08 | 1 |
+| 2021 | Action | 12763606 | 825 | 5.50 | 2 |
+| 2021 | Adventure | 10139737 | 403 | 5.78 | 3 |
+| 2022 | Drama | 15905374 | 4102 | 6.25 | 1 |
+| 2022 | Action | 13285720 | 923 | 5.67 | 2 |
+| 2022 | Comedy | 10153278 | 2200 | 5.85 | 3 |
+| 2023 | Drama | 14763511 | 4291 | 6.22 | 1 |
+| 2023 | Action | 10517397 | 1041 | 5.81 | 2 |
+| 2023 | Comedy | 9427864 | 2240 | 5.96 | 3 |
+| 2024 | Drama | 11543313 | 3962 | 6.27 | 1 |
+| 2024 | Action | 8591715 | 987 | 5.83 | 2 |
+| 2024 | Comedy | 7034226 | 2077 | 5.86 | 3 |
+| 2025 | Drama | 8420383 | 3494 | 6.40 | 1 |
+| 2025 | Action | 7556647 | 929 | 5.90 | 2 |
+| 2025 | Comedy | 5766354 | 1882 | 6.04 | 3 |
 
 ### 2.3 The top three compared to the other genres of the same year
 
 Source: `output/q3_top3_vs_rest/table.md`
 
-<!-- paste the table here -->
+| startYear | top3_votes | top3_films | top3_n_genres | top3_avg_rating | rest_votes | rest_films | rest_n_genres | rest_avg_rating | top3_votes_share_pct |
+|---|---|---|---|---|---|---|---|---|---|
+| 1980 | 7680761 | 1340 | 3 | 5.74 | 9619712 | 2243 | 21 | 6.16 | 44.40 |
+| 1981 | 5204222 | 1327 | 3 | 5.92 | 5981925 | 2341 | 20 | 6.16 | 46.50 |
+| 1982 | 7373792 | 1450 | 3 | 5.80 | 9479099 | 2259 | 19 | 6.03 | 43.80 |
+| 1983 | 6904959 | 1584 | 3 | 5.85 | 8142783 | 2204 | 19 | 6.01 | 45.90 |
+| 1984 | 9590566 | 1544 | 3 | 5.96 | 11832089 | 2289 | 19 | 6.07 | 44.80 |
+| 1985 | 11009194 | 1834 | 3 | 5.97 | 10344930 | 2046 | 19 | 6.08 | 51.60 |
+| 1986 | 9713224 | 1910 | 3 | 5.91 | 11280307 | 2086 | 19 | 6.10 | 46.30 |
+| 1987 | 10137682 | 2261 | 3 | 5.78 | 13622236 | 1950 | 19 | 6.05 | 42.70 |
+| 1988 | 11558410 | 2198 | 3 | 5.77 | 13097118 | 2036 | 19 | 6.07 | 46.90 |
+| 1989 | 11874819 | 2018 | 3 | 5.91 | 12117652 | 2353 | 19 | 6.02 | 49.50 |
+| 1990 | 13875469 | 2134 | 3 | 5.89 | 16540644 | 2046 | 19 | 6.03 | 45.60 |
+| 1991 | 12379004 | 2053 | 3 | 6.00 | 15607385 | 1947 | 19 | 6.00 | 44.20 |
+| 1992 | 12561663 | 1960 | 3 | 5.97 | 15868694 | 1854 | 19 | 6.16 | 44.20 |
+| 1993 | 16479572 | 1908 | 3 | 5.91 | 20292861 | 1842 | 19 | 6.10 | 44.80 |
+| 1994 | 27822007 | 2019 | 3 | 5.92 | 19901089 | 1885 | 19 | 6.03 | 58.30 |
+| 1995 | 26269098 | 1999 | 3 | 5.97 | 27302245 | 2018 | 19 | 6.11 | 49.00 |
+| 1996 | 16958164 | 2034 | 3 | 6.02 | 20981489 | 1968 | 20 | 6.16 | 44.70 |
+| 1997 | 24925756 | 2277 | 3 | 5.87 | 31595885 | 1966 | 19 | 6.13 | 44.10 |
+| 1998 | 27779716 | 2308 | 3 | 5.99 | 26164531 | 2098 | 19 | 6.01 | 51.50 |
+| 1999 | 30818715 | 2473 | 3 | 5.93 | 39840797 | 2249 | 19 | 6.02 | 43.60 |
+| 2000 | 28259369 | 2407 | 3 | 5.84 | 34464560 | 2673 | 19 | 6.03 | 45.10 |
+| 2001 | 33392233 | 2627 | 3 | 5.91 | 45393061 | 2851 | 19 | 6.04 | 42.40 |
+| 2002 | 34040323 | 2174 | 3 | 5.85 | 46212545 | 3408 | 22 | 6.41 | 42.40 |
+| 2003 | 35617802 | 3063 | 3 | 5.89 | 42628002 | 2764 | 20 | 5.98 | 45.50 |
+| 2004 | 38824266 | 3217 | 3 | 5.90 | 55100132 | 3127 | 21 | 6.24 | 41.30 |
+| 2005 | 33124376 | 3447 | 3 | 5.88 | 48213466 | 3524 | 21 | 6.19 | 40.70 |
+| 2006 | 41207535 | 3856 | 3 | 5.80 | 55290494 | 4078 | 20 | 6.18 | 42.70 |
+| 2007 | 39139493 | 3880 | 3 | 5.88 | 62952316 | 4450 | 21 | 6.05 | 38.30 |
+| 2008 | 42204381 | 4376 | 3 | 5.79 | 62233265 | 4979 | 20 | 6.05 | 40.40 |
+| 2009 | 43051396 | 4905 | 3 | 5.86 | 61022079 | 5671 | 20 | 6.11 | 41.40 |
+| 2010 | 43932898 | 3936 | 3 | 5.97 | 65965956 | 7671 | 21 | 6.03 | 40.00 |
+| 2011 | 51721857 | 5569 | 3 | 5.93 | 60418776 | 7024 | 21 | 6.23 | 46.10 |
+| 2012 | 46219328 | 5779 | 3 | 5.96 | 63420411 | 7571 | 21 | 6.14 | 42.20 |
+| 2013 | 53684852 | 6310 | 3 | 5.93 | 75932454 | 8503 | 20 | 6.15 | 41.40 |
+| 2014 | 63182314 | 5105 | 3 | 6.03 | 70621797 | 11006 | 23 | 6.62 | 47.20 |
+| 2015 | 50101570 | 5262 | 3 | 5.95 | 57236893 | 10862 | 21 | 6.22 | 46.70 |
+| 2016 | 50274320 | 5348 | 3 | 5.93 | 63712501 | 10923 | 21 | 6.25 | 44.10 |
+| 2017 | 48574812 | 7095 | 3 | 5.88 | 59268061 | 9431 | 22 | 6.23 | 45.00 |
+| 2018 | 45681748 | 5571 | 3 | 5.83 | 57367842 | 11161 | 22 | 6.09 | 44.30 |
+| 2019 | 46388559 | 7266 | 3 | 5.82 | 58146095 | 9641 | 22 | 6.04 | 44.40 |
+| 2020 | 23002723 | 5298 | 3 | 5.72 | 28157047 | 7767 | 21 | 6.00 | 45.00 |
+| 2021 | 37206788 | 4812 | 3 | 5.79 | 42907240 | 9742 | 22 | 5.95 | 46.40 |
+| 2022 | 39344372 | 7225 | 3 | 5.92 | 45699896 | 9741 | 22 | 6.34 | 46.30 |
+| 2023 | 34708772 | 7572 | 3 | 6.00 | 42567821 | 9719 | 22 | 6.16 | 44.90 |
+| 2024 | 27169254 | 7026 | 3 | 5.99 | 36052166 | 9661 | 23 | 6.33 | 43.00 |
+| 2025 | 21743384 | 6305 | 3 | 6.11 | 33103263 | 8656 | 22 | 6.43 | 39.60 |
 
 ### 2.4 Directors with one film >= 8.0 and several others averaging <= 6.0
 
 Source: `output/q4_one_hit_directors/table.md`
 
-<!-- paste the table here -->
+| primaryName | n_films | hit_rating | n_others | avg_rating_others |
+|---|---|---|---|---|
+| William Beaudine | 145 | 8.20 | 144 | 5.85 |
+| Richard Thorpe | 114 | 8.10 | 113 | 5.86 |
+| Alfredo B. Crevenna | 113 | 8.30 | 112 | 5.66 |
+| Raoul Walsh | 108 | 8.10 | 107 | 5.93 |
+| Franz Antel | 75 | 8.10 | 74 | 5.21 |
+| Arthur Maria Rabenalt | 58 | 8.00 | 57 | 5.70 |
+| Houssam El-Din Mustafa | 56 | 8.30 | 55 | 5.55 |
+| Carmine Gallone | 55 | 8.10 | 54 | 5.86 |
+| Tulio Demicheli | 51 | 8.00 | 50 | 5.94 |
+| Rizal Mantovani | 50 | 9.00 | 49 | 5.42 |
+| Sidney Salkow | 50 | 8.10 | 49 | 5.96 |
+| Wai Keung Lau | 48 | 8.00 | 47 | 5.71 |
+| Ramón Torrado | 47 | 8.00 | 46 | 5.66 |
+| Hasan El-Emam | 46 | 8.10 | 45 | 5.69 |
+| Alfred Vohrer | 45 | 8.60 | 44 | 5.95 |
+| Yōjirō Takita | 44 | 8.00 | 43 | 5.59 |
+| Hisayasu Satō | 44 | 8.00 | 43 | 5.79 |
+| Viktor Tourjansky | 44 | 8.20 | 43 | 5.97 |
+| A. Razak Mohaideen | 42 | 8.20 | 41 | 5.00 |
+| Javier Aguirre | 40 | 8.10 | 39 | 5.06 |
 
 ### 2.5 Series whose worst episode is in the last season and best episode in the first two
 
 Source: `output/q5_series_going_downhill/table.md`
 
-<!-- paste the table here -->
+| primaryTitle | startYear | last_season | best_season | best_rating | worst_season | worst_rating | rating_drop |
+|---|---|---|---|---|---|---|---|
+| The Queen of Flow | 2018 | 3 | 1 | 9.80 | 3 | 1.10 | 8.70 |
+| One Punch Man | 2015 | 3 | 1 | 9.50 | 3 | 1.60 | 7.90 |
+| The Rosie O'Donnell Show | 1996 | 4 | 1 | 9.20 | 4 | 2.00 | 7.20 |
+| The Gumby Show | 1956 | 3 | 1 | 8.10 | 3 | 1.00 | 7.10 |
+| Rainbow High | 2020 | 6 | 1 | 9.40 | 6 | 2.30 | 7.10 |
+| House of Cards | 2013 | 6 | 2 | 9.50 | 6 | 2.50 | 7.00 |
+| Family Law | 1999 | 3 | 2 | 9.40 | 3 | 2.80 | 6.60 |
+| All Dogs Go to Heaven: The Series | 1996 | 3 | 2 | 9.20 | 3 | 2.60 | 6.60 |
+| The Drew Barrymore Show | 2020 | 6 | 2 | 8.40 | 6 | 2.00 | 6.40 |
+| Margarita | 2024 | 3 | 1 | 9.40 | 3 | 3.10 | 6.30 |
+| American Dreams | 2002 | 3 | 2 | 9.70 | 3 | 3.40 | 6.30 |
+| Soy Luna | 2016 | 4 | 2 | 9.10 | 4 | 3.00 | 6.10 |
+| The Parrot Show | 2024 | 5 | 1 | 9.30 | 5 | 3.30 | 6.00 |
+| Leaf Cast | 2006 | 5 | 1 | 8.30 | 5 | 2.40 | 5.90 |
+| The Rookie | 2018 | 8 | 1 | 9.00 | 8 | 3.10 | 5.90 |
+| Rykter | 2022 | 4 | 2 | 9.20 | 4 | 3.40 | 5.80 |
+| Love Is Blind: Sweden | 2024 | 3 | 1 | 7.70 | 3 | 1.90 | 5.80 |
+| The Flash | 2014 | 9 | 1 | 9.60 | 9 | 3.80 | 5.80 |
+| An Anatolian Tale | 2020 | 7 | 2 | 9.10 | 7 | 3.40 | 5.70 |
+| Bloodline | 2015 | 3 | 1 | 9.10 | 3 | 3.60 | 5.50 |
 
 ### 2.6 Actors successful in several languages
 
 Sources: `output/q6_actors_2plus_languages/table.md`, `output/q6_actors_3plus_languages/table.md`
 
-<!-- paste the tables here -->
+`output/q6_actors_2plus_languages/table.md`:
+
+| primaryName | n_languages | languages |
+|---|---|---|
+| Aishwarya Rai Bachchan | 7 | bn, en, fr, hi, ja, ta, tr |
+| Anne Parillaud | 7 | ca, en, es, fr, hi, ja, tr |
+| Monica Bellucci | 7 | bn, en, es, fr, hi, ml, tr |
+| Nikolay Grinko | 7 | az, bg, en, ru, sk, uk, uz |
+| Alain Lathière | 6 | ca, en, es, fr, hi, tr |
+| Bruno Randon | 6 | ca, en, es, fr, hi, tr |
+| Deepika Padukone | 6 | en, es, fr, hi, ja, tr |
+| Helene Aligier | 6 | ca, en, es, fr, hi, tr |
+| Jacques Boudet | 6 | ca, en, es, fr, hi, tr |
+| Laura Chéron | 6 | ca, en, es, fr, hi, tr |
+| Luis Zahera | 6 | en, es, fr, hi, ja, tr |
+| Mammootty | 6 | en, fr, hi, ja, ml, ta |
+| Manolo Solo | 6 | en, es, fr, hi, ja, tr |
+| Marc Duret | 6 | ca, en, es, fr, hi, tr |
+| Okan Yalabık | 6 | en, fr, hi, ja, th, tr |
+| Patrick Fontana | 6 | ca, en, es, fr, hi, tr |
+| Patrick Pérez | 6 | ca, en, es, fr, hi, tr |
+| Pierre-Alain de Garrigues | 6 | ca, en, es, fr, hi, tr |
+| Toni Servillo | 6 | ca, en, fr, he, sv, tr |
+| Ulrich Tukur | 6 | de, en, fr, he, sv, tr |
+
+`output/q6_actors_3plus_languages/table.md`:
+
+| primaryName | n_languages | languages |
+|---|---|---|
+| Aishwarya Rai Bachchan | 7 | bn, en, fr, hi, ja, ta, tr |
+| Anne Parillaud | 7 | ca, en, es, fr, hi, ja, tr |
+| Monica Bellucci | 7 | bn, en, es, fr, hi, ml, tr |
+| Nikolay Grinko | 7 | az, bg, en, ru, sk, uk, uz |
+| Alain Lathière | 6 | ca, en, es, fr, hi, tr |
+| Bruno Randon | 6 | ca, en, es, fr, hi, tr |
+| Deepika Padukone | 6 | en, es, fr, hi, ja, tr |
+| Helene Aligier | 6 | ca, en, es, fr, hi, tr |
+| Jacques Boudet | 6 | ca, en, es, fr, hi, tr |
+| Laura Chéron | 6 | ca, en, es, fr, hi, tr |
+| Luis Zahera | 6 | en, es, fr, hi, ja, tr |
+| Mammootty | 6 | en, fr, hi, ja, ml, ta |
+| Manolo Solo | 6 | en, es, fr, hi, ja, tr |
+| Marc Duret | 6 | ca, en, es, fr, hi, tr |
+| Okan Yalabık | 6 | en, fr, hi, ja, th, tr |
+| Patrick Fontana | 6 | ca, en, es, fr, hi, tr |
+| Patrick Pérez | 6 | ca, en, es, fr, hi, tr |
+| Pierre-Alain de Garrigues | 6 | ca, en, es, fr, hi, tr |
+| Toni Servillo | 6 | ca, en, fr, he, sv, tr |
+| Ulrich Tukur | 6 | de, en, fr, he, sv, tr |
 
 ### 2.7 Actors with a 20+ year career whose popularity peaked early
 
 Source: `output/q7_early_peak_actors/table.md`
 
-<!-- paste the table here -->
+| primaryName | first_year | last_year | n_films | first_avg_rating | second_avg_rating | drop |
+|---|---|---|---|---|---|---|
+| Veronica Lake | 1941 | 1970 | 20 | 6.43 | 2.50 | 3.93 |
+| Mahesh Anand | 1988 | 2019 | 32 | 5.47 | 1.90 | 3.57 |
+| Philomina | 1983 | 2003 | 16 | 7.33 | 3.80 | 3.53 |
+| Robert Woods | 1966 | 2016 | 28 | 5.14 | 1.70 | 3.44 |
+| Artur Rolén | 1918 | 1967 | 20 | 7.20 | 3.84 | 3.36 |
+| Aleksey Batalov | 1954 | 2007 | 16 | 7.35 | 4.05 | 3.30 |
+| Norman Wisdom | 1953 | 2002 | 22 | 6.32 | 3.20 | 3.12 |
+| Tom Savini | 1977 | 2015 | 20 | 6.13 | 3.16 | 2.97 |
+| Saroja Devi B. | 1958 | 2023 | 15 | 8.00 | 5.07 | 2.93 |
+| Ari Lehman | 1978 | 2025 | 15 | 6.40 | 3.56 | 2.84 |
+| Tuncay Akça | 1975 | 2018 | 19 | 6.73 | 3.90 | 2.83 |
+| Akbar Abdi | 1987 | 2023 | 42 | 6.47 | 3.67 | 2.80 |
+| Reza Naji | 1997 | 2025 | 18 | 7.30 | 4.52 | 2.78 |
+| Coşkun Göğen | 1975 | 2022 | 23 | 5.47 | 2.70 | 2.77 |
+| Caroline Munro | 1972 | 2020 | 19 | 5.59 | 2.82 | 2.77 |
+| Dev Anand | 1951 | 2003 | 57 | 7.07 | 4.32 | 2.75 |
+| Nichelle Nichols | 1974 | 2020 | 16 | 6.49 | 3.74 | 2.75 |
+| Ulli Lommel | 1964 | 2020 | 29 | 5.63 | 2.94 | 2.69 |
+| Charles Fleischer | 1984 | 2025 | 17 | 6.09 | 3.40 | 2.69 |
+| Robert Clarke | 1945 | 1990 | 27 | 5.48 | 2.83 | 2.65 |
 
 ### 2.8 Multi-talented film professionals
 
 Sources: `output/q8_multi_talented/table.md`, `output/q8_multi_role_vs_single_role/table.md`
 
-<!-- paste the tables here -->
+`output/q8_multi_talented/table.md`:
+
+| primaryName | n_roles | roles | n_films | avg_rating |
+|---|---|---|---|---|
+| Nassar | 3 | actor+director+writer | 352 | 6.17 |
+| Tanikella Bharani | 3 | actor+director+writer | 333 | 6.19 |
+| Anupam Kher | 3 | actor+director+writer | 314 | 5.56 |
+| Prakash Raj | 3 | actor+director+writer | 308 | 6.14 |
+| Ron Jeremy | 3 | actor+director+writer | 294 | 5.84 |
+| Govardhan Asrani | 3 | actor+director+writer | 266 | 5.67 |
+| Cüneyt Arkın | 3 | actor+director+writer | 261 | 5.24 |
+| Nedumudi Venu | 3 | actor+director+writer | 241 | 6.35 |
+| Jing Wong | 3 | actor+director+writer | 219 | 5.65 |
+| Eric Tsang | 3 | actor+director+writer | 199 | 5.65 |
+| Sadhu Kokila | 3 | actor+director+writer | 198 | 6.42 |
+| Jesús Franco | 3 | actor+director+writer | 193 | 4.87 |
+| Joey Silvera | 3 | actor+director+writer | 187 | 5.89 |
+| Osman F. Seden | 3 | actor+director+writer | 183 | 5.72 |
+| Paul Thomas | 3 | actor+director+writer | 180 | 6.04 |
+| Gérard Depardieu | 3 | actor+director+writer | 177 | 6.01 |
+| Salim Kumar | 3 | actor+director+writer | 176 | 5.37 |
+| Anthony Chau-Sang Wong | 3 | actor+director+writer | 171 | 5.89 |
+| René Cardona | 3 | actor+director+writer | 170 | 6.00 |
+| Fernando Fernán Gómez | 3 | actor+director+writer | 165 | 6.00 |
+
+`output/q8_multi_role_vs_single_role/table.md`:
+
+| multi_role | n_films | avg_rating |
+|---|---|---|
+| False | 365064 | 5.92 |
+| True | 107388 | 5.96 |
 
 ### Methodological explanation - Data exploration
 
