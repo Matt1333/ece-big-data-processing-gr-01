@@ -1,0 +1,27 @@
+| genre | n_outliers | genre_avg_runtime |
+|---|---|---|
+| Drama | 509 | 99.00 |
+| Thriller | 342 | 97.60 |
+| Romance | 324 | 100.60 |
+| Adventure | 294 | 95.70 |
+| Comedy | 292 | 95.20 |
+| Crime | 279 | 97.30 |
+| Action | 250 | 103.20 |
+| Horror | 215 | 90.70 |
+| Biography | 167 | 95.90 |
+| Western | 85 | 87.30 |
+| War | 83 | 98.50 |
+| Animation | 82 | 87.70 |
+| Adult | 70 | 83.30 |
+| History | 65 | 101.30 |
+| Family | 62 | 95.80 |
+| Fantasy | 61 | 96.50 |
+| Sci-Fi | 57 | 93.70 |
+| Musical | 41 | 102.00 |
+| Sport | 35 | 95.50 |
+| Music | 33 | 94.70 |
+| Mystery | 29 | 96.60 |
+| Documentary | 23 | 88.80 |
+| News | 17 | 85.70 |
+| Film-Noir | 3 | 82.70 |
+| Reality-TV | 1 | 100.00 |
