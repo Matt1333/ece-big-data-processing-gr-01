@@ -181,11 +181,11 @@ saved in output rejected, in order that nothing disappears in silence. Then if a
 duplicated, we would have to handle it, but in our case none are duplicated, so we are fine in
 this case.
 
-To conclude on this part, the numbers. We have 39 columns measured, 18 quality controls, and 7160
+To conclude on this part, the numbers, we have 39 columns measured, 22 quality controls, and 7160
 lines rejected. These rejected lines come from the orphan foreign keys: 3209 orphan nconst in
 title.principals, which represent 7150 lines, and 4 orphan parentTconst in title.episode, which
-represent 10 lines. The other problems are not rejected but set to null: 27 deaths before birth, 5
-impossible years, and 4 runtimes negative or null.
+represent 10 lines. The other problems are not rejected but set to null. We have 377 years of
+birth before 1700, 27 deaths before birth, 5 impossible years, and 4 runtimes negative or null.
 
 The alternatives we rejected. The first one is to delete the entire line when a field is bad: we
 would lose millions of lines for a field that none of our questions were using, so it was useless.
@@ -365,7 +365,8 @@ the requirement of the subject is maintained. We have many matches in a window o
 But we have a limitation to accept: the exact correspondence on the normalized title produces some
 false positives when a page has the same name as a film. For example if a film is named Bruges, or
 if it is a simple word that is the same for a film and for a town, a country, a dish, it can be
-many things. We can't separate it from the film without losing some real matches.
+many things. We can't separate it from the film without losing some real matches. 8 of the 25, so
+one third of the sample, so the 2.81% is an upper bound and not a measure.
 
 ### 4.2 Metrics of the test window
 
@@ -503,7 +504,9 @@ would always be bigger and more costly. Spark forbids it. So the exact number is
 in batch, on the parquet, where keeping everything in memory is not a matter.
 
 What we measure is that the mean of the delay is approximately 0.80 seconds. The minimum is 0
-second and the maximum is 1 second. We have no negative value.
+second and the maximum is 1 second. We have no negative value. The lag that we've measured is
+between 0 and 1 second. The watermark is at 10 minutes, so none of the events can be this late to
+be rejected.
 
 So the first campaign gives us a negative lag, but we understood that it was a delay on the clock,
 so we retry it on an empty topic, and the proper measure was between 0 and 1 second. So my
@@ -613,11 +616,14 @@ is `org.apache.spark:spark-sql-kafka-0-10_2.13:4.2.0`, that has been downloaded 
 beginning of the session.
 
 Then finally, here is all the time that has been needed for this project. The job for the
-preparation, 80 minutes. For the exploration, from the first question to the fifth, 27 minutes.
-For the exploration, 6th question, 22 minutes. For the exploration, 7th and 8th question, 44
-minutes. For the select targets, 13 minutes. For the fetch Wikipedia, 15 minutes. The enrich
+preparation, 1 hour and 49 minutes. For the exploration, from the first question to the fifth, 27
+minutes. For the exploration, 6th question, 22 minutes. For the exploration, 7th and 8th question,
+44 minutes. For the select targets, 13 minutes. For the fetch Wikipedia, 15 minutes. The enrich
 Spark, 5 minutes. The streaming, 18 minutes. And the open question, 17 minutes. So in total, the
-Spark batch has been around 3 hours 30 minutes.
+Spark batch has been around 3 hours and 57 minutes. So why 3 hours and 57 minutes? It's because
+the total excludes the Wikipedia fetch and also the streaming, because they are not Spark batch
+jobs: one is waiting for the network to answer, and the other is waiting for the stream. The
+cleaning of the preparation, 38 minutes. The reconstruction of the table from parquet, 42 seconds.
 
 So the volume has been 7 tables. The biggest one was title.principals with 102 million lines. Then
 title.akas with 59 million lines, then name.basics with 15 million, title.basics and title.crew
