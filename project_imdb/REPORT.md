@@ -504,8 +504,9 @@ would always be bigger and more costly. Spark forbids it. So the exact number is
 in batch, on the parquet, where keeping everything in memory is not a matter.
 
 What we measure is that the mean of the delay is approximately 0.80 seconds. The minimum is 0
-second and the maximum is 1 second. We have no negative value. None of the events has been removed
-by the watermark during the 18 minutes window.
+second and the maximum is 1 second. We have no negative value. The lag that we've measured is
+between 0 and 1 second. The watermark is at 10 minutes, so none of the events can be this late to
+be rejected.
 
 So the first campaign gives us a negative lag, but we understood that it was a delay on the clock,
 so we retry it on an empty topic, and the proper measure was between 0 and 1 second. So my
@@ -619,8 +620,10 @@ preparation, 1 hour and 49 minutes. For the exploration, from the first question
 minutes. For the exploration, 6th question, 22 minutes. For the exploration, 7th and 8th question,
 44 minutes. For the select targets, 13 minutes. For the fetch Wikipedia, 15 minutes. The enrich
 Spark, 5 minutes. The streaming, 18 minutes. And the open question, 17 minutes. So in total, the
-Spark batch has been around 3 hours and 57 minutes. The cleaning of the preparation, 38 minutes.
-The reconstruction of the table from parquet, 42 seconds.
+Spark batch has been around 3 hours and 57 minutes. So why 3 hours and 57 minutes? It's because
+the total excludes the Wikipedia fetch and also the streaming, because they are not Spark batch
+jobs: one is waiting for the network to answer, and the other is waiting for the stream. The
+cleaning of the preparation, 38 minutes. The reconstruction of the table from parquet, 42 seconds.
 
 So the volume has been 7 tables. The biggest one was title.principals with 102 million lines. Then
 title.akas with 59 million lines, then name.basics with 15 million, title.basics and title.crew
