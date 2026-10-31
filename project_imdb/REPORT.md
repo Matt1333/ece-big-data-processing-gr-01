@@ -286,7 +286,7 @@ Source: `output/e2_enrichment_coverage/table.md`
 
 | n_films | n_with_synopsis | pct_with_synopsis | n_principals | n_principals_with_bio | avg_synopsis_length |
 |---|---|---|---|---|---|
-| 6256 | 5818 | 93.00 | 18140 | 15055 | 898.00 |
+| 6256 | 5828 | 93.20 | 18140 | 15057 | 898.00 |
 
 ### 3.3 Why some records could not be enriched
 
@@ -295,8 +295,7 @@ Source: `output/e3_missing_reasons/table.md`
 | synopsis_note | n_films |
 |---|---|
 | no english wikipedia article linked to this imdb id in wikidata | 427 |
-| article found but no lead section to extract | 9 |
-| extract too short to be a usable summary | 2 |
+| extract too short to be a usable summary | 1 |
 
 ### 3.4 Sample of enriched records
 
