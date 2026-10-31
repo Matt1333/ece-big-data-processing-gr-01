@@ -43,10 +43,11 @@ TARGETS = f"{ROOT}/output/targets"
 # the host writes here and the container reads the same files through its mount
 ENRICHED = f"{ROOT}/enriched"
 
-# Wikimedia asks every client to identify itself with a contact. We have to put a real contact
-# of the group here before running it for the submission.
+# Wikimedia asks every client to identify itself with a contact, so we give the repository and
+# the school address of the member in charge of this job.
 USER_AGENT = ("ECE-BigDataProcessing-Project/1.0 "
-              "(https://github.com/Matt1333/ece-big-data-processing-gr-01; student project)")
+              "(https://github.com/Matt1333/ece-big-data-processing-gr-01; "
+              "kylian.pinto@edu.ece.fr; student project)")
 
 SPARQL_URL = "https://query.wikidata.org/sparql"
 API_URL = "https://en.wikipedia.org/w/api.php"
@@ -75,10 +76,21 @@ def _ssl_context():
 
 SSL_CONTEXT = _ssl_context()
 
-# the errors which are worth to try again: a service under load, a timeout, a connection which
-# dropped. A certificate or a dns error would fail again identically, so retrying them only
-# wastes our time
-RETRYABLE = (urllib.error.HTTPError, TimeoutError, ConnectionError)
+# the errors which are worth to try again: a timeout, a connection which dropped, and on the http
+# side only a 429 or a 5xx (see http_get). A certificate, a dns error, a 400 or a 404 would fail
+# again identically, so retrying them only asks wikimedia the same wrong question
+RETRYABLE = (TimeoutError, ConnectionError)
+
+
+def wait_before_retry(attempt, error, retry_after=None):
+    """Sleeps before the next attempt: what the server asked for, or an exponential backoff.
+
+    If the service is under load, asking again immediately is exactly what the rate limit
+    policies forbid. `Retry-After` can also be a date, in this case we keep the backoff.
+    """
+    wait = int(retry_after) if retry_after and retry_after.isdigit() else 2 ** attempt
+    print(f"  retry in {wait}s ({error})")
+    time.sleep(wait)
 
 
 def http_get(url, params):
@@ -90,12 +102,12 @@ def http_get(url, params):
         try:
             with urllib.request.urlopen(req, timeout=60, context=SSL_CONTEXT) as r:
                 return json.loads(r.read().decode("utf-8"))
+        except urllib.error.HTTPError as e:
+            if e.code != 429 and e.code < 500:
+                raise RuntimeError(f"{url} refused the request: http {e.code}") from e
+            wait_before_retry(attempt, e, e.headers.get("Retry-After"))
         except RETRYABLE as e:
-            # exponential backoff: if the service is under load, asking again immediately is
-            # exactly what the rate limit policies forbid
-            wait = 2 ** attempt
-            print(f"  retry in {wait}s ({e})")
-            time.sleep(wait)
+            wait_before_retry(attempt, e)
         except urllib.error.URLError as e:
             # a tls or a dns failure: five identical attempts would teach us nothing
             raise RuntimeError(f"{url} unreachable: {e.reason}") from e
@@ -130,7 +142,9 @@ def map_imdb_to_wikipedia(imdb_ids):
         for b in data["results"]["bindings"]:
             imdb = b["imdb"]["value"]
             url = b["article"]["value"]
-            title = urllib.parse.unquote(url.rsplit("/", 1)[-1]).replace("_", " ")
+            # everything after /wiki/ and not after the last slash: a title can contain one, and
+            # cutting `Face/Off` at the slash asks for the article `Off`, which is another page
+            title = urllib.parse.unquote(url.split("/wiki/", 1)[1]).replace("_", " ")
             mapping[imdb] = {
                 "wikipedia_title": title,
                 "source_url": url,
