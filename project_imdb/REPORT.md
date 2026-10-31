@@ -280,25 +280,44 @@ Jobs: `jobs/04a_select_targets.py`, `jobs/04b_fetch_wikipedia.py`, `jobs/04c_enr
 
 Source: `output/e1_enrichment_scope/table.md`
 
-<!-- paste the table here -->
+| year_min | year_max | top_n_per_genre_per_year | principals_per_film | min_votes | n_films | n_people |
+|---|---|---|---|---|---|---|
+| 1980 | 2025 | 10 | 3 | 1000 | 6256 | 10557 |
 
 ### 3.2 Coverage
 
 Source: `output/e2_enrichment_coverage/table.md`
 
-<!-- paste the table here -->
+| n_films | n_with_synopsis | pct_with_synopsis | n_principals | n_principals_with_bio | avg_synopsis_length |
+|---|---|---|---|---|---|
+| 6256 | 5818 | 93.00 | 18140 | 15055 | 898.00 |
 
 ### 3.3 Why some records could not be enriched
 
 Source: `output/e3_missing_reasons/table.md`
 
-<!-- paste the table here -->
+| synopsis_note | n_films |
+|---|---|
+| no english wikipedia article linked to this imdb id in wikidata | 427 |
+| article found but no lead section to extract | 9 |
+| extract too short to be a usable summary | 2 |
 
 ### 3.4 Sample of enriched records
 
 Source: `output/e4_sample/table.md`
 
-<!-- paste the table here -->
+| primaryTitle | startYear | averageRating | synopsis_start | synopsis_source_url | n_principals_with_bio |
+|---|---|---|---|---|---|
+| The Shawshank Redemption | 1994 | 9.30 | The Shawshank Redemption is a 1994 American drama film written and directed by Frank Darabont, based on the 1982 Stephen King novella Rita Hayworth and Shawshank Redemption. The film tells the story of banker Andy Dufresne (Tim Robbins), wh | https://en.wikipedia.org/wiki/The_Shawshank_Redemption | 3 |
+| The Dark Knight | 2008 | 9.10 | The Dark Knight is a 2008 superhero film directed by Christopher Nolan, who co-wrote the screenplay with his brother Jonathan. Based on the DC Comics superhero Batman, it is the sequel to Batman Begins (2005), and the second installment in  | https://en.wikipedia.org/wiki/The_Dark_Knight | 3 |
+| Inception | 2010 | 8.80 | Inception is a 2010 science fiction heist film written and directed by Christopher Nolan, who also produced it with his wife Emma Thomas. The film stars Leonardo DiCaprio as a professional thief who steals information by infiltrating his ta | https://en.wikipedia.org/wiki/Inception | 3 |
+| Fight Club | 1999 | 8.80 | Fight Club is a 1999 American film directed by David Fincher starring Brad Pitt, Edward Norton, and Helena Bonham Carter. It is based on the 1996 novel Fight Club by Chuck Palahniuk. Norton plays the unnamed narrator, who is discontented wi | https://en.wikipedia.org/wiki/Fight_Club | 3 |
+| Interstellar | 2014 | 8.70 | Interstellar is a 2014 epic science fiction drama film directed by Christopher Nolan, who co-wrote the screenplay with his brother, Jonathan Nolan. It features an ensemble cast led by Matthew McConaughey, Anne Hathaway, Jessica Chastain, Bi | https://en.wikipedia.org/wiki/Interstellar_(film) | 3 |
+| Forrest Gump | 1994 | 8.80 | Forrest Gump is a 1994 American comedy-drama film directed by Robert Zemeckis. An adaptation of the 1986 novel of the same name by Winston Groom, the film's screenplay was written by Eric Roth. It stars Tom Hanks in the title role, alongsid | https://en.wikipedia.org/wiki/Forrest_Gump | 3 |
+| Pulp Fiction | 1994 | 8.80 | Pulp Fiction is a 1994 American crime film written and directed by Quentin Tarantino from a story he conceived with Roger Avary. It tells four intertwining tales of crime and violence in Los Angeles. The film stars John Travolta, Samuel L.  | https://en.wikipedia.org/wiki/Pulp_Fiction | 3 |
+| The Matrix | 1999 | 8.70 | The Matrix is a 1999 science fiction–action film written and directed by the Wachowskis. The first installment in the Matrix film series, it stars Keanu Reeves, Laurence Fishburne, Carrie-Anne Moss, Hugo Weaving, and Joe Pantoliano. The fil | https://en.wikipedia.org/wiki/The_Matrix | 3 |
+| The Lord of the Rings: The Fellowship of the Ring | 2001 | 8.90 | The Lord of the Rings: The Fellowship of the Ring is a 2001 epic fantasy film directed by Peter Jackson from a screenplay by Fran Walsh, Philippa Boyens, and Jackson. It is based on J. R. R. Tolkien's 1954 The Fellowship of the Ring, the fi | https://en.wikipedia.org/wiki/The_Lord_of_the_Rings:_The_Fellowship_of_the_Ring | 3 |
+| The Lord of the Rings: The Return of the King | 2003 | 9.00 | The Lord of the Rings: The Return of the King is a 2003 epic fantasy film directed by Peter Jackson from a screenplay he wrote with Fran Walsh and Philippa Boyens. It is based on 1955's The Return of the King, the third volume of the novel  | https://en.wikipedia.org/wiki/The_Lord_of_the_Rings:_The_Return_of_the_King | 3 |
 
 ### Methodological explanation - Data enrichment
 
