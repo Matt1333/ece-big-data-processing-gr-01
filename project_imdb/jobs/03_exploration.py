@@ -313,6 +313,9 @@ def q6_multilingual_actors(spark):
 
 
 # ------------------------------------------------------------------ Q7 careers peaking early
+MIN_FILMS_PER_HALF = 5    # films needed in each half of a career for its average to mean something
+
+
 def q7_early_peak_actors(spark):
     """Actors with a career of 20+ years and 15+ films, whose popularity peaked early.
 
@@ -326,8 +329,11 @@ def q7_early_peak_actors(spark):
         F.col("category").isin("actor", "actress"))
     names = read(spark, "name.basics").select("nconst", "primaryName")
 
-    acted = principals.join(
-        films.select("tconst", "startYear", "averageRating"), "tconst")
+    acted = (principals.select("tconst", "nconst")
+             # title.principals can list a person twice on one film (actor and actress, or two
+             # orderings): a film must count once, otherwise the career counts are inflated
+             .dropDuplicates(["tconst", "nconst"])
+             .join(films.select("tconst", "startYear", "averageRating"), "tconst"))
     # we read `acted` two times below: one time to build the careers, one time to cut them in
     # halves. Without this cache spark replays the whole plan for each of them, which means
     # filtering and joining the 102 million rows of title.principals a second time.
@@ -352,6 +358,9 @@ def q7_early_peak_actors(spark):
                   F.count(F.lit(1)).alias("n_films")))
 
     result = (pivot
+            # each half must hold enough films, else an average of one or two films is noise
+            .where((F.col("first_n_films") >= MIN_FILMS_PER_HALF)
+                   & (F.col("second_n_films") >= MIN_FILMS_PER_HALF))
             .where(F.col("first_avg_rating") - F.col("second_avg_rating") >= 1.0)
             .withColumn("drop", F.round(F.col("first_avg_rating")
                                         - F.col("second_avg_rating"), 2))
@@ -393,9 +402,14 @@ def q8_multi_talented(spark):
     per_person = (principals.groupBy("nconst")
                   .agg(F.countDistinct("role").alias("n_roles"),
                        F.sort_array(F.collect_set("role")).alias("roles"),
-                       F.countDistinct("tconst").alias("n_films"),
-                       F.round(F.avg("averageRating"), 2).alias("avg_rating"))
+                       F.countDistinct("tconst").alias("n_films"))
                   .where((F.col("n_roles") >= 2) & (F.col("n_films") >= 5)))
+    # the average must be taken once per film: `principals` has one row per role, so averaging
+    # it directly weights a film by the number of roles of the person on it
+    film_avg = (principals.select("nconst", "tconst", "averageRating").distinct()
+                .groupBy("nconst")
+                .agg(F.round(F.avg("averageRating"), 2).alias("avg_rating")))
+    per_person = per_person.join(film_avg, "nconst")
     per_person.cache()
 
     multi = (per_person.join(names, "nconst")
