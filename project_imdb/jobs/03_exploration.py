@@ -197,23 +197,37 @@ def q5_series_going_downhill(spark):
     ep = ep.join(eligible, "parentTconst")
 
     w_series = Window.partitionBy("parentTconst")
-    w_worst = Window.partitionBy("parentTconst").orderBy(F.col("averageRating").asc())
-    w_best = Window.partitionBy("parentTconst").orderBy(F.col("averageRating").desc())
+    w_season = Window.partitionBy("parentTconst", "seasonNumber")
+    # ties are broken explicitly, otherwise spark picks one of the tied episodes and a series can
+    # enter or leave the table from one run to another. The tie-break is the strict one: on a
+    # tie the worst episode is the earliest one, and the best episode is the latest one, so a
+    # series is kept only if the worst is in the last season and the best in the first two
+    # without any tied episode that would contradict it.
+    w_worst = Window.partitionBy("parentTconst").orderBy(
+        F.col("averageRating").asc(), F.col("seasonNumber").asc(),
+        F.col("episodeNumber").asc(), "tconst")
+    w_best = Window.partitionBy("parentTconst").orderBy(
+        F.col("averageRating").desc(), F.col("seasonNumber").desc(),
+        F.col("episodeNumber").desc(), "tconst")
 
     marked = (ep
               .withColumn("last_season", F.max("seasonNumber").over(w_series))
+              .withColumn("season_n_episodes", F.count("*").over(w_season))
               .withColumn("worst_rank", F.row_number().over(w_worst))
               .withColumn("best_rank", F.row_number().over(w_best)))
 
     worst = marked.where(F.col("worst_rank") == 1).select(
         "parentTconst", F.col("seasonNumber").alias("worst_season"),
-        F.col("averageRating").alias("worst_rating"), "last_season")
+        F.col("averageRating").alias("worst_rating"), "last_season",
+        F.col("season_n_episodes").alias("last_season_episodes"))
     best = marked.where(F.col("best_rank") == 1).select(
         "parentTconst", F.col("seasonNumber").alias("best_season"),
         F.col("averageRating").alias("best_rating"))
 
     return (worst.join(best, "parentTconst")
             .where((F.col("worst_season") == F.col("last_season"))
+                   # the last season must be a real one, with 10 episodes or more like the others
+                   & (F.col("last_season_episodes") >= 10)
                    & (F.col("best_season") <= 2))
             .join(basics.select(F.col("tconst").alias("parentTconst"),
                                 "primaryTitle", "startYear"), "parentTconst")
@@ -366,7 +380,8 @@ def q7_early_peak_actors(spark):
                                         - F.col("second_avg_rating"), 2))
             .join(names, "nconst")
             .select("primaryName", "first_year", "last_year", "n_films",
-                    "first_avg_rating", "second_avg_rating", "drop")
+                    "first_n_films", "first_avg_rating",
+                    "second_n_films", "second_avg_rating", "drop")
             .orderBy(F.col("drop").desc()))
     # the caller runs the actions, so it is the caller who releases the cache, not here
     return result, acted
