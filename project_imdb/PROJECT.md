@@ -2,13 +2,11 @@
 
 ## Contributors
 
-<!-- TO COMPLETE: real email of each member before the submission -->
-
 | Name | GitHub | Email |
 |---|---|---|
-| DAVIDSON Matt | `Matt1333` | *to complete* |
-| TOUVRON Erwan | `erwan-oss` | *to complete* |
-| PINTO Kylian | `Kycks912004` | *to complete* |
+| DAVIDSON Matt | `Matt1333` | matt.davidson@edu.ece.fr |
+| TOUVRON Erwan | `erwan-oss` | erwan.touvron@edu.ece.fr |
+| PINTO Kylian | `Kycks912004` | kylian.pinto@edu.ece.fr |
 
 Group: gr-01
 
