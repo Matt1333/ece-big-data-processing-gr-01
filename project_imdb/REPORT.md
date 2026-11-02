@@ -501,24 +501,24 @@ Source: `output/q5_series_going_downhill/table.md`
 |---|---|---|---|---|---|---|---|
 | The Queen of Flow | 2018 | 3 | 1 | 9.80 | 3 | 1.10 | 8.70 |
 | One Punch Man | 2015 | 3 | 1 | 9.50 | 3 | 1.60 | 7.90 |
-| The Rosie O'Donnell Show | 1996 | 4 | 1 | 9.20 | 4 | 2.00 | 7.20 |
 | The Gumby Show | 1956 | 3 | 1 | 8.10 | 3 | 1.00 | 7.10 |
-| Rainbow High | 2020 | 6 | 1 | 9.40 | 6 | 2.30 | 7.10 |
-| House of Cards | 2013 | 6 | 2 | 9.50 | 6 | 2.50 | 7.00 |
-| Family Law | 1999 | 3 | 2 | 9.40 | 3 | 2.80 | 6.60 |
+| Rainbow High | 2020 | 6 | 2 | 9.40 | 6 | 2.30 | 7.10 |
 | All Dogs Go to Heaven: The Series | 1996 | 3 | 2 | 9.20 | 3 | 2.60 | 6.60 |
-| The Drew Barrymore Show | 2020 | 6 | 2 | 8.40 | 6 | 2.00 | 6.40 |
+| Family Law | 1999 | 3 | 2 | 9.40 | 3 | 2.80 | 6.60 |
 | Margarita | 2024 | 3 | 1 | 9.40 | 3 | 3.10 | 6.30 |
-| American Dreams | 2002 | 3 | 2 | 9.70 | 3 | 3.40 | 6.30 |
 | Soy Luna | 2016 | 4 | 2 | 9.10 | 4 | 3.00 | 6.10 |
 | The Parrot Show | 2024 | 5 | 1 | 9.30 | 5 | 3.30 | 6.00 |
 | Leaf Cast | 2006 | 5 | 1 | 8.30 | 5 | 2.40 | 5.90 |
-| The Rookie | 2018 | 8 | 1 | 9.00 | 8 | 3.10 | 5.90 |
-| Rykter | 2022 | 4 | 2 | 9.20 | 4 | 3.40 | 5.80 |
-| Love Is Blind: Sweden | 2024 | 3 | 1 | 7.70 | 3 | 1.90 | 5.80 |
+| Love Is Blind: Sweden | 2024 | 3 | 2 | 7.70 | 3 | 1.90 | 5.80 |
 | The Flash | 2014 | 9 | 1 | 9.60 | 9 | 3.80 | 5.80 |
-| An Anatolian Tale | 2020 | 7 | 2 | 9.10 | 7 | 3.40 | 5.70 |
+| Rykter | 2022 | 4 | 2 | 9.20 | 4 | 3.40 | 5.80 |
 | Bloodline | 2015 | 3 | 1 | 9.10 | 3 | 3.60 | 5.50 |
+| 7vs.Wild | 2021 | 5 | 2 | 8.80 | 5 | 3.50 | 5.30 |
+| Your Favorite Martian | 2010 | 3 | 2 | 9.20 | 3 | 4.00 | 5.20 |
+| Kaverille ei jätetä | 1999 | 3 | 2 | 8.30 | 3 | 3.20 | 5.10 |
+| Honey, I Shrunk the Kids: The TV Show | 1997 | 3 | 1 | 7.50 | 3 | 2.50 | 5.00 |
+| Forræder | 2022 | 6 | 2 | 9.60 | 6 | 4.80 | 4.80 |
+| Larva | 2011 | 4 | 2 | 9.60 | 4 | 4.80 | 4.80 |
 
 ### 2.6 Actors successful in several languages
 
@@ -578,28 +578,28 @@ Sources: `output/q6_actors_2plus_languages/table.md`, `output/q6_actors_3plus_la
 
 Source: `output/q7_early_peak_actors/table.md`
 
-| primaryName | first_year | last_year | n_films | first_avg_rating | second_avg_rating | drop |
-|---|---|---|---|---|---|---|
-| Veronica Lake | 1941 | 1970 | 20 | 6.43 | 2.50 | 3.93 |
-| Mahesh Anand | 1988 | 2019 | 32 | 5.47 | 1.90 | 3.57 |
-| Philomina | 1983 | 2003 | 16 | 7.33 | 3.80 | 3.53 |
-| Robert Woods | 1966 | 2016 | 28 | 5.14 | 1.70 | 3.44 |
-| Artur Rolén | 1918 | 1967 | 20 | 7.20 | 3.84 | 3.36 |
-| Aleksey Batalov | 1954 | 2007 | 16 | 7.35 | 4.05 | 3.30 |
-| Norman Wisdom | 1953 | 2002 | 22 | 6.32 | 3.20 | 3.12 |
-| Tom Savini | 1977 | 2015 | 20 | 6.13 | 3.16 | 2.97 |
-| Saroja Devi B. | 1958 | 2023 | 15 | 8.00 | 5.07 | 2.93 |
-| Ari Lehman | 1978 | 2025 | 15 | 6.40 | 3.56 | 2.84 |
-| Tuncay Akça | 1975 | 2018 | 19 | 6.73 | 3.90 | 2.83 |
-| Akbar Abdi | 1987 | 2023 | 42 | 6.47 | 3.67 | 2.80 |
-| Reza Naji | 1997 | 2025 | 18 | 7.30 | 4.52 | 2.78 |
-| Coşkun Göğen | 1975 | 2022 | 23 | 5.47 | 2.70 | 2.77 |
-| Caroline Munro | 1972 | 2020 | 19 | 5.59 | 2.82 | 2.77 |
-| Dev Anand | 1951 | 2003 | 57 | 7.07 | 4.32 | 2.75 |
-| Nichelle Nichols | 1974 | 2020 | 16 | 6.49 | 3.74 | 2.75 |
-| Ulli Lommel | 1964 | 2020 | 29 | 5.63 | 2.94 | 2.69 |
-| Charles Fleischer | 1984 | 2025 | 17 | 6.09 | 3.40 | 2.69 |
-| Robert Clarke | 1945 | 1990 | 27 | 5.48 | 2.83 | 2.65 |
+| primaryName | first_year | last_year | n_films | first_n_films | first_avg_rating | second_n_films | second_avg_rating | drop |
+|---|---|---|---|---|---|---|---|---|
+| Tom Savini | 1977 | 2015 | 20 | 7 | 6.13 | 13 | 3.16 | 2.97 |
+| Dev Anand | 1951 | 2003 | 41 | 34 | 7.11 | 7 | 4.16 | 2.95 |
+| Akbar Abdi | 1987 | 2023 | 40 | 14 | 6.46 | 26 | 3.68 | 2.78 |
+| Reza Naji | 1997 | 2025 | 18 | 5 | 7.30 | 13 | 4.52 | 2.78 |
+| Caroline Munro | 1972 | 2020 | 19 | 13 | 5.59 | 6 | 2.82 | 2.77 |
+| Sumalatha | 1980 | 2023 | 25 | 19 | 7.24 | 6 | 4.65 | 2.59 |
+| Ulli Lommel | 1964 | 2020 | 25 | 19 | 5.64 | 6 | 3.10 | 2.54 |
+| Rekha | 1986 | 2026 | 28 | 14 | 7.34 | 14 | 4.89 | 2.45 |
+| András Kern | 1973 | 2016 | 22 | 13 | 7.21 | 9 | 4.84 | 2.37 |
+| Raju Shrestha | 1972 | 2012 | 16 | 11 | 7.00 | 5 | 4.64 | 2.36 |
+| Martin Dejdar | 1987 | 2020 | 15 | 9 | 6.31 | 6 | 4.05 | 2.26 |
+| Kaviyoor Ponnamma | 1973 | 2021 | 45 | 28 | 7.69 | 17 | 5.44 | 2.25 |
+| Mikhail Boyarskiy | 1976 | 2025 | 20 | 7 | 6.63 | 13 | 4.38 | 2.25 |
+| Johny | 1984 | 2022 | 17 | 10 | 7.10 | 7 | 4.86 | 2.24 |
+| Seema | 1980 | 2019 | 23 | 15 | 7.26 | 8 | 5.05 | 2.21 |
+| Shobha Khote | 1955 | 2022 | 27 | 18 | 6.73 | 9 | 4.56 | 2.17 |
+| Virginia Mayo | 1943 | 1997 | 48 | 43 | 6.20 | 5 | 4.08 | 2.12 |
+| Helen | 1957 | 2012 | 55 | 47 | 6.62 | 8 | 4.51 | 2.11 |
+| Nandamuri Balakrishna | 1984 | 2025 | 46 | 20 | 6.41 | 26 | 4.32 | 2.09 |
+| Mukhyamantri Chandru | 1987 | 2023 | 16 | 10 | 7.99 | 6 | 5.92 | 2.07 |
 
 ### 2.8 Multi-talented film professionals
 
@@ -610,25 +610,25 @@ Sources: `output/q8_multi_talented/table.md`, `output/q8_multi_role_vs_single_ro
 | primaryName | n_roles | roles | n_films | avg_rating |
 |---|---|---|---|---|
 | Nassar | 3 | actor+director+writer | 352 | 6.17 |
-| Tanikella Bharani | 3 | actor+director+writer | 333 | 6.19 |
-| Anupam Kher | 3 | actor+director+writer | 314 | 5.56 |
+| Tanikella Bharani | 3 | actor+director+writer | 333 | 6.16 |
+| Anupam Kher | 3 | actor+director+writer | 314 | 5.58 |
 | Prakash Raj | 3 | actor+director+writer | 308 | 6.14 |
-| Ron Jeremy | 3 | actor+director+writer | 294 | 5.84 |
-| Govardhan Asrani | 3 | actor+director+writer | 266 | 5.67 |
-| Cüneyt Arkın | 3 | actor+director+writer | 261 | 5.24 |
-| Nedumudi Venu | 3 | actor+director+writer | 241 | 6.35 |
-| Jing Wong | 3 | actor+director+writer | 219 | 5.65 |
+| Ron Jeremy | 3 | actor+director+writer | 294 | 5.82 |
+| Govardhan Asrani | 3 | actor+director+writer | 266 | 5.66 |
+| Cüneyt Arkın | 3 | actor+director+writer | 261 | 5.32 |
+| Nedumudi Venu | 3 | actor+director+writer | 241 | 6.34 |
+| Jing Wong | 3 | actor+director+writer | 219 | 5.66 |
 | Eric Tsang | 3 | actor+director+writer | 199 | 5.65 |
-| Sadhu Kokila | 3 | actor+director+writer | 198 | 6.42 |
-| Jesús Franco | 3 | actor+director+writer | 193 | 4.87 |
-| Joey Silvera | 3 | actor+director+writer | 187 | 5.89 |
-| Osman F. Seden | 3 | actor+director+writer | 183 | 5.72 |
-| Paul Thomas | 3 | actor+director+writer | 180 | 6.04 |
+| Sadhu Kokila | 3 | actor+director+writer | 198 | 6.39 |
+| Jesús Franco | 3 | actor+director+writer | 193 | 4.88 |
+| Joey Silvera | 3 | actor+director+writer | 187 | 5.88 |
+| Osman F. Seden | 3 | actor+director+writer | 183 | 5.73 |
+| Paul Thomas | 3 | actor+director+writer | 180 | 6.01 |
 | Gérard Depardieu | 3 | actor+director+writer | 177 | 6.01 |
 | Salim Kumar | 3 | actor+director+writer | 176 | 5.37 |
-| Anthony Chau-Sang Wong | 3 | actor+director+writer | 171 | 5.89 |
-| René Cardona | 3 | actor+director+writer | 170 | 6.00 |
-| Fernando Fernán Gómez | 3 | actor+director+writer | 165 | 6.00 |
+| Anthony Chau-Sang Wong | 3 | actor+director+writer | 171 | 5.88 |
+| René Cardona | 3 | actor+director+writer | 170 | 6.02 |
+| Fernando Fernán Gómez | 3 | actor+director+writer | 165 | 5.93 |
 
 `output/q8_multi_role_vs_single_role/table.md`:
 
@@ -961,7 +961,95 @@ Sources: `output/o4_summary/table.md`, `output/o1_best_duos/table.md`,
 `output/o2_worst_duos/table.md`, `output/o3_most_prolific_duos/table.md`,
 `output/o5_lift_by_number_of_films/table.md`
 
-<!-- paste the tables here -->
+`output/o4_summary/table.md`:
+
+| n_duos | n_duos_better_together | n_duos_worse_together | n_duos_equal | avg_lift | median_lift | avg_rating_together | avg_rating_apart |
+|---|---|---|---|---|---|---|---|
+| 1429 | 979 | 430 | 20 | 0.22 | 0.23 | 6.70 | 6.48 |
+
+`output/o1_best_duos/table.md`:
+
+| director_name | actor_name | films_together | first_year | last_year | together_avg | director_apart_avg | actor_apart_avg | apart_avg | lift |
+|---|---|---|---|---|---|---|---|---|---|
+| Mehmet Ada Öztekin | Sarp Akkaya | 3 | 2021 | 2024 | 8.17 | 6.68 | 4.53 | 5.61 | 2.56 |
+| Peter Jackson | Elijah Wood | 3 | 2001 | 2003 | 8.90 | 7.38 | 6.09 | 6.74 | 2.16 |
+| Francis Ford Coppola | Al Pacino | 3 | 1972 | 1990 | 8.57 | 6.29 | 6.61 | 6.45 | 2.12 |
+| Ertem Eğilmez | Halit Akçatepe | 6 | 1973 | 1977 | 8.50 | 7.59 | 5.43 | 6.51 | 1.99 |
+| K. Selvaraghavan | Sonia Agarwal | 3 | 2003 | 2006 | 8.10 | 6.70 | 5.53 | 6.12 | 1.98 |
+| Rajkumar Santoshi | Meenakshi Sheshadri | 3 | 1990 | 1996 | 7.70 | 6.41 | 5.10 | 5.75 | 1.95 |
+| M. Rajesh | Santhanam | 3 | 2009 | 2012 | 6.93 | 4.23 | 5.73 | 4.98 | 1.95 |
+| James Cameron | Michael Biehn | 3 | 1984 | 1989 | 8.00 | 7.09 | 5.23 | 6.16 | 1.84 |
+| Robert Zemeckis | Christopher Lloyd | 3 | 1985 | 1990 | 7.90 | 6.85 | 5.51 | 6.18 | 1.72 |
+| Anthony Russo | Robert Downey Jr. | 3 | 2016 | 2019 | 8.20 | 6.43 | 6.52 | 6.48 | 1.72 |
+| Joe Russo | Robert Downey Jr. | 3 | 2016 | 2019 | 8.20 | 6.43 | 6.52 | 6.48 | 1.72 |
+| Rajkumar Hirani | Sanjay Dutt | 3 | 2003 | 2014 | 8.10 | 7.50 | 5.33 | 6.41 | 1.69 |
+| Karan Johar | Kajol | 3 | 1998 | 2010 | 7.63 | 5.89 | 6.05 | 5.97 | 1.66 |
+| Francis Ford Coppola | Robert Duvall | 3 | 1969 | 1979 | 8.07 | 6.35 | 6.47 | 6.41 | 1.66 |
+| Quentin Tarantino | Uma Thurman | 3 | 1994 | 2004 | 8.33 | 7.58 | 5.93 | 6.75 | 1.58 |
+| Gareth Evans | Iko Uwais | 3 | 2009 | 2014 | 7.40 | 5.97 | 5.67 | 5.82 | 1.58 |
+| Richard Linklater | Julie Delpy | 3 | 1995 | 2013 | 8.03 | 6.85 | 6.14 | 6.50 | 1.53 |
+| Hansal Mehta | Rajkummar Rao | 5 | 2012 | 2020 | 7.38 | 5.45 | 6.34 | 5.90 | 1.49 |
+| James Cameron | Arnold Schwarzenegger | 3 | 1984 | 1994 | 8.00 | 7.09 | 5.94 | 6.52 | 1.48 |
+| Mohan Raja | Ravi Mohan | 4 | 2004 | 2015 | 7.57 | 6.13 | 6.06 | 6.10 | 1.47 |
+
+`output/o2_worst_duos/table.md`:
+
+| director_name | actor_name | films_together | first_year | last_year | together_avg | director_apart_avg | actor_apart_avg | apart_avg | lift |
+|---|---|---|---|---|---|---|---|---|---|
+| Kartal Tibet | Halit Akçatepe | 3 | 1985 | 2004 | 5.43 | 6.63 | 8.50 | 7.56 | -2.13 |
+| George Gallo | Morgan Freeman | 3 | 2019 | 2021 | 4.53 | 5.99 | 6.55 | 6.27 | -1.74 |
+| Prabhu Deva | Salman Khan | 3 | 2009 | 2021 | 3.80 | 5.58 | 5.50 | 5.54 | -1.74 |
+| Giovanni Storti | Giacomo Poretti | 3 | 2002 | 2016 | 5.17 | 7.30 | 6.30 | 6.80 | -1.63 |
+| Aldo Baglio | Giacomo Poretti | 3 | 2002 | 2016 | 5.17 | 7.30 | 6.30 | 6.80 | -1.63 |
+| Matt Eskandari | Bruce Willis | 4 | 2019 | 2022 | 3.70 | 5.13 | 5.45 | 5.29 | -1.59 |
+| David Dhawan | Varun Dhawan | 4 | 2014 | 2026 | 4.25 | 5.60 | 5.93 | 5.77 | -1.52 |
+| Albert Pyun | Ice-T | 3 | 1997 | 2000 | 3.33 | 4.24 | 5.46 | 4.85 | -1.52 |
+| Rohit Shetty | Ranveer Singh | 3 | 2018 | 2024 | 4.67 | 5.86 | 6.49 | 6.18 | -1.51 |
+| Neri Parenti | Christian De Sica | 11 | 1998 | 2008 | 4.29 | 5.98 | 5.44 | 5.71 | -1.42 |
+| Kôbun Shizuno | Takahiro Sakurai | 3 | 2017 | 2018 | 5.63 | 6.70 | 7.39 | 7.05 | -1.42 |
+| Sidney J. Furie | Louis Gossett Jr. | 3 | 1986 | 1995 | 4.30 | 5.70 | 5.67 | 5.68 | -1.38 |
+| James Huth | Jean Dujardin | 3 | 2005 | 2016 | 4.77 | 5.78 | 6.44 | 6.11 | -1.34 |
+| Vikram Bhatt | Emraan Hashmi | 3 | 2012 | 2016 | 4.17 | 5.06 | 5.94 | 5.50 | -1.33 |
+| Kôbun Shizuno | Kana Hanazawa | 3 | 2017 | 2018 | 5.63 | 6.70 | 7.21 | 6.95 | -1.32 |
+| Patryk Vega | Agnieszka Dygant | 3 | 2017 | 2019 | 4.17 | 5.02 | 5.90 | 5.46 | -1.29 |
+| Fumihiko Sori | Tsubasa Honda | 3 | 2017 | 2022 | 5.40 | 6.48 | 6.87 | 6.67 | -1.27 |
+| Michael Almereyda | Ethan Hawke | 3 | 2000 | 2020 | 4.90 | 5.72 | 6.60 | 6.16 | -1.26 |
+| William Beaudine | Bela Lugosi | 3 | 1943 | 1952 | 4.43 | 5.63 | 5.75 | 5.69 | -1.26 |
+| Aldo Baglio | Giovanni Storti | 3 | 1998 | 2016 | 5.33 | 7.13 | 6.00 | 6.57 | -1.24 |
+
+`output/o3_most_prolific_duos/table.md`:
+
+| director_name | actor_name | films_together | first_year | last_year | together_avg | director_apart_avg | actor_apart_avg | apart_avg | lift |
+|---|---|---|---|---|---|---|---|---|---|
+| Kartal Tibet | Kemal Sunal | 26 | 1976 | 1990 | 6.91 | 5.40 | 7.33 | 6.37 | 0.54 |
+| Gerald Thomas | Sidney James | 21 | 1960 | 1974 | 6.27 | 5.45 | 6.83 | 6.14 | 0.13 |
+| David Dhawan | Govinda | 16 | 1990 | 2009 | 6.00 | 4.95 | 5.53 | 5.24 | 0.76 |
+| Akira Kurosawa | Toshirō Mifune | 16 | 1948 | 1965 | 7.81 | 7.29 | 7.16 | 7.23 | 0.58 |
+| Priyadarshan | Mohanlal | 15 | 1985 | 2021 | 7.51 | 6.61 | 6.88 | 6.75 | 0.76 |
+| John Ford | John Wayne | 14 | 1939 | 1963 | 7.26 | 6.90 | 6.59 | 6.74 | 0.52 |
+| Erik Balling | Ove Sprogøe | 13 | 1968 | 1981 | 6.94 | 6.87 | 5.97 | 6.42 | 0.52 |
+| Neri Parenti | Paolo Villaggio | 13 | 1980 | 1996 | 5.98 | 4.29 | 6.63 | 5.46 | 0.52 |
+| Terence Fisher | Peter Cushing | 13 | 1957 | 1974 | 6.48 | 6.28 | 5.91 | 6.09 | 0.39 |
+| Rohit Shetty | Ajay Devgn | 12 | 2003 | 2024 | 5.76 | 5.28 | 5.92 | 5.60 | 0.16 |
+| Woody Allen | Mia Farrow | 11 | 1982 | 1992 | 7.16 | 6.86 | 6.23 | 6.54 | 0.62 |
+| Roy William Neill | Basil Rathbone | 11 | 1942 | 1946 | 6.83 | 6.70 | 6.52 | 6.61 | 0.22 |
+| Roy William Neill | Nigel Bruce | 11 | 1942 | 1946 | 6.83 | 6.70 | 7.08 | 6.89 | -0.06 |
+| Henry King | Tyrone Power | 11 | 1936 | 1957 | 6.61 | 6.81 | 6.93 | 6.87 | -0.26 |
+| Neri Parenti | Christian De Sica | 11 | 1998 | 2008 | 4.29 | 5.98 | 5.44 | 5.71 | -1.42 |
+| Natuk Baytan | Kemal Sunal | 10 | 1976 | 1986 | 7.48 | 6.10 | 7.14 | 6.62 | 0.86 |
+| Martin Scorsese | Robert De Niro | 10 | 1973 | 2023 | 7.73 | 7.41 | 6.42 | 6.91 | 0.82 |
+| Michael Curtiz | Errol Flynn | 10 | 1935 | 1941 | 7.01 | 6.81 | 6.78 | 6.79 | 0.22 |
+| Claude Chabrol | Stéphane Audran | 10 | 1960 | 1992 | 7.00 | 6.71 | 6.90 | 6.81 | 0.19 |
+| Ertem Eğilmez | Münir Özkul | 10 | 1972 | 1979 | 7.88 | 7.83 | 7.67 | 7.75 | 0.13 |
+
+`output/o5_lift_by_number_of_films/table.md`:
+
+| films_together_bucket | n_duos | avg_lift | avg_rating_together |
+|---|---|---|---|
+| 3 | 845 | 0.23 | 6.69 |
+| 4-5 | 440 | 0.21 | 6.71 |
+| 6-9 | 121 | 0.20 | 6.69 |
+| 10+ | 23 | 0.24 | 6.74 |
 
 ### 5.3 Key takeaways
 
