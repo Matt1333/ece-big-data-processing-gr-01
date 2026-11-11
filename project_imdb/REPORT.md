@@ -974,8 +974,7 @@ apart?**
 
 ### 5.1 What is investigated and why it is interesting
 
-<!-- TO WRITE: the question, why it is worth asking, and what additional data was needed
-     (none here, the imdb tables are enough). -->
+For this last part, we are tackling an open question: do recurring director-actor duos make better films than the same two people working separately? In our code, a duo is considered recurring once they reach at least three films together, which lets us filter out occasional collaborations of just one or two films. The films where they work with others are not thrown away at all; on the contrary, they serve as a baseline to calculate what each person does without the other. Everyone knows a famous duo, like Scorsese and De Niro for example. The idea is that these duos bring out the best work of both careers. And the goal here is to measure it with numbers. So behind this gap, several explanations are possible. Either the director knows their actor's strengths and knows what role to give them, or perhaps the duo simply follows the success of a first film that pushes the director to call the same actor again. We can also think that a successful director has a bigger budget and therefore surrounds themselves with the same talents, even if this remains an hypothesis. To give an overview using the data, the table shows, for example, Peter Jackson and Elijah Wood across three films with an average rating of 8.90 compared to about 6.74 when they work separately. That said, the raw numbers do not settle between these different explanations. To carry this out, no additional data was needed since the IMDb tables are enough, unlike section 3 where we had to look up information on Wikipedia.
 
 ### 5.2 Results
 
