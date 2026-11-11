@@ -700,16 +700,48 @@ Source: `output/e4_sample/table.md`
 
 ### Methodological explanation - Data enrichment
 
-<!-- TO WRITE. Points to cover:
-     - why Wikipedia (the subject names it; human-authored; open licence) and why no text is
-       generated
-     - how a film is matched to its article: through the Wikidata property P345 and not by
-       searching the title, and what a title search would have broken
-     - how the rate limits and the scraping policies are respected (User-Agent, serial requests,
-       batch endpoints, backoff, resumable run, official APIs only)
-     - the lineage kept on every record and why it matters
-     - the note added programmatically when the information is missing
-     - how the code would scale to the full dataset without a structural change -->
+1. Why Wikipedia
+
+IMDb has no summary and no bio so we decided to choose Wikipedia. The advantage is that it is an open model with content written by humans and under a free licence. Instead of using an AI to generate summaries which was completely forbidden in the subject,so we took directly the raw text of the introduction. And we did a minimal processing,in fact we just replaced the line breaks with spaces and we removed the texts of less than 50 characters.
+We chose the English version of Wikipedia which lets us reach about 93.2% of global coverage.In the sample we looked at the missing ones are mostly Asian and Turkish cinema and Japanese animation.
+
+2. Linking a film to its article
+
+To link a film to its Wikipedia article,doing a search just by the title would have been complicated with all the homonyms and the remakes. So we went through Wikidata by looking for the property P345 which is the unique IMDb identifier and this guarantees an exact match. 
+And to avoid overloading the network we grouped the identifiers in batches of 300 in the SPARQL queries. This is how we saw that 427 films had no English article linked on Wikidata.
+
+3. Respecting the Wikimedia rules
+
+To respect the good practices of the APIs and to avoid HTML scraping we did everything in series and never in parallel with a pause of one second between each SPARQL query and of 0.3 second for Wikipedia. 
+On the volume side we process by batches of 300 identifiers for SPARQL and of 20 articles per call. 
+About the differents limits and the evolution of the code: 
+-for the User-Agent:the contact was not there during the first download so we added it after the review to be in line with the instructions. 
+-for the error handling:at the beginning the script retried in case of error even on 400 or 404 errors which were going to fail again anyway. 
+So we fixed it to target only the temporary errors, so 429 and 5xx, by following the Retry-After header.
+About the resume of the download it restarts by type of data and not by batch since the final file is written only once when all the processing is finished.
+
+4. Traceability and the "/" bug
+
+To manage the traceability of the summaries and the bios each record contains 4 metadata:
+-source_url,
+-wikidata_uri
+-source_name and retrieved_at. 
+It is essential to check the source to date the extraction and to respect the authors with the CC BY-SA licence. It is in particular by reading the code again and by coming across the particular case of Face/Off that we spotted a bug with the "/" in the URLs. 
+Frost/Nixon showed the same problem and by measuring then on the data we saw that it affected 18 URLs(17 films and one person:David France). 
+Concretely, for 8 URLsthe system got the text of another article without showing any errors: Frost/Nixon for example ended up with the summary of Nixon. 
+And for the 10 other URLs we got no text at all. This is actually where the missing introductions came from. 
+Finally this traceability through source_url let us see exactly what was not working and so fix the code and run a clean extraction again.
+
+5. When the information is missing
+
+When an information is missing the text field stays empty (null) and we always put a note to explain why.For example: "no english wikipedia article linked" (for 427 films),"extract too short" (for one film:Pardon) and "not downloaded in this run". 
+About the concrete results for the synopses we got 5,828 out of the 6,256 targeted films which makes 93.2% of coverage.
+And for the biographies we got 15,057 out of a total of 18,140 targeted slots which correspond to 10,557 distinct people.
+
+6. Moving to the full dataset
+
+The architecture of the project lets us adapt the volume of processing by simply changing the constants: the years, the top N or the number of principals, directly at the top of the Python script "04a_select_targets.py".
+All the part of data selection and joins is entirely done by Spark. There is only the download phase that is done outside Spark and this component works by batches and handles the resume with only one constraint: the execution time logically grows with the number of requests so with the number of films to process.
 
 ---
 
