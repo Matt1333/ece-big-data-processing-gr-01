@@ -639,18 +639,39 @@ Sources: `output/q8_multi_talented/table.md`, `output/q8_multi_role_vs_single_ro
 
 ### Methodological explanation - Data exploration
 
-<!-- TO WRITE. Several questions of the subject are not directly measurable and had to be turned
-     into a rule. For each one, say what rule was chosen and why, and what another rule would
-     have changed:
-     - "notably different" -> z-score > 3 inside each genre
-     - "popular" genre -> total number of votes, and not the number of films
-     - "successful" film -> rating >= 7.0 with at least 1000 votes
-     - "peaked early" -> career cut in two halves, gap of at least 1 rating point
-     - "feature film" -> titleType movie and runtime >= 60 minutes
-     Also worth covering: the language of a film is taken from title.akas, which describes the
-     versions of a title and not only the original one, and what this approximation costs. -->
+# Rules and Methodologies
 
----
+## Rule 1 - What is a « notably different » film? (Question 2.1)
+For films whose duration stands out from the ordinary, the subject uses the expression « notably different » without giving a precise figure. We therefore set a measurable rule by retaining a $z$-score greater than $3$ in absolute value. The calculation is carried out separately for each genre, which is necessary given that average durations vary significantly (for example, around $82$ minutes for Film-Noir compared to over $103$ minutes for Action). The scope was restricted to feature films, meaning titles of type `movie` with a duration of at least $60$ minutes.
+
+If we had lowered the threshold to $2$, the list would have grown considerably, whereas a threshold of $4$ would have kept only the most extreme cases. Concretely, for Drama, this yields $509$ films with an average around $99$ minutes, with isolated cases like London EC1. The film *24 Hour Psycho* also stands out among the extremes in the Horror category. Among the limitations, films lasting several days increase the standard deviation and raise the effective threshold. In addition, the $60$-minute floor excludes brief formats.
+
+## Rule 2 - Measuring a popular genre (Question 2.2)
+The question asked to isolate the three most popular genres each year from $1980$ to $2025$. Since the notion of popularity required objective measurement, our choice fell on the total votes ($\text{numVotes}$) accumulated by all films in each genre over the year, making sure that a multi-genre film is counted once for each of its genres.
+
+Counting only the number of productions would have measured industry activity rather than true public interest, systematically placing Drama at the top with its roughly $1,000$ films per year over the 1980s decade. Using votes, genres like Adventure take first place in $1981$, or Science Fiction positions itself in second place in $1982$. In $1980$, Drama maintains the lead. If we had opted for another approach, such as a raw film count, it would simply have reflected production volume. Limitations remain: a high production volume mechanically favors the accumulation of votes, and a vote only indicates that a film was rated, not that it was appreciated positively.
+
+## Rule 3 - Successful actor and language processing (Question 2.6)
+This question examines actors who achieved success in films of multiple languages. A film is deemed successful if it reaches a minimum rating of $7.0$ for at least $1,000$ votes, which prevents an obscure title rated by a very few users from skewing the results. A threshold lowered to $500$ votes would have integrated less stable ratings, while a filter at $2,000$ votes would have eliminated many recognized films without restricting the selection to productions with a high volume of votes.
+
+Regarding language, basic IMDb data does not provide this information natively. We therefore retained an approach based on titles: if the `originalTitle` differs from the `primaryTitle`, we cross-reference with the regions or countries where this original title appears, and if both titles are identical, we count English provided that an alternative English title is present in `title.akas`. The main drawback of this method is that a film whose title is written the same way in English and its original language is automatically counted as English.
+
+The tables for $2$ languages and $3$ languages ($2\text{plus}$ and $3\text{plus}$) turn out to be identical, with the top twenty actors appearing in films shot in $6$ or $7$ languages according to this counting method, which renders the additional filter ineffective for the top of the ranking. These are the languages of the films in which they acted, without assuming they master all of them.
+
+## Rule 4 - A career that peaked early (Question 2.7)
+The objective was to identify actors with a career spanning at least $20$ years (with a minimum of $15$ films in total, $5$ films per career half, and $100$ votes per film) whose popularity declined over time. The career is split into two halves starting from the midpoint between the first and last year, and the average rating of films in the first period is compared to that of the second. The actor is retained if the average of the first half exceeds that of the second by at least $1$ point.
+
+If we had chosen a smaller gap, it would have captured simple routine rating fluctuations between two films. Among the limitations, the average rating reflects the perceived quality of the works rather than the actor's direct notoriety, and the partitioning according to the career midpoint can generate very unbalanced film volumes between the two halves.
+
+## Rule 5 - The feature film scope
+This definition constitutes the common core of the section: a feature film corresponds to a title of type `movie` in IMDb, with a duration greater than or equal to $60$ minutes and a valid start year (non-null `startYear`). This makes it possible to discard series and short files.
+
+A threshold set at $90$ minutes would have eliminated genuine shorter feature films. The $60$-minute choice therefore remains an established convention to preserve a broad base, even though it excludes by construction the briefest formats.
+
+## Areas of attention and additional limitations
+Regarding series (Question 2.5): The analysis of series whose quality drops relies on precise criteria for seasons and episodes, but the absence of a filter on the number of votes per episode can accentuate the impact of isolated ratings. For example, as Matt's checks in the data confirmed, a series like *The Queen of Flow* reaches the top of the ranking with a worst episode evaluated by only $7$ people, giving a rating of $1.10$ compared to a best episode rated at $9.80$.
+
+Checks and corrections: Code peer reviews allowed adjusting specific points, such as the removal of duplicates in `title.principals` (which notably brought Dev Anand down from $57$ to $41$ films) or the management of ties, making it possible to obtain consistent results for the report.
 
 ## 3. Data enrichment
 
