@@ -1,15 +1,5 @@
 # IMDb project - Report
 
-> **How to use this file.** The structure, the questions and the result tables are here. Every
-> block marked `<!-- TO WRITE -->` has to be written by a member of the group: the subject
-> requires a *Methodological Explanation* for each major section, and the AI policy of the
-> subject forbids using an AI tool to write the explanations and the reasoning of this report.
->
-> Each `table.md` quoted below is produced by the corresponding job in `output/`. Paste its
-> content under the heading, or keep the reference if you prefer.
->
-> Delete this block before the submission.
-
 Group: gr-01 - DAVIDSON Matt, TOUVRON Erwan, PINTO Kylian
 
 ---
