@@ -1106,7 +1106,10 @@ Sources: `output/o4_summary/table.md`, `output/o1_best_duos/table.md`,
 
 ### 5.3 Key takeaways
 
-<!-- TO WRITE -->
+For this last part, this section presents the main takeaways drawn from the analysis of recurring director-actor duos. Out of the 1,429 duos retained, 979 show a higher average rating when working together compared to their separate projects, meaning about 69% of the pairings make better films together. In absolute terms, the average gain remains modest, sitting at around 0.22 points (6.70 together versus 6.48 separately).
+Collaborations like Martin Scorsese and Robert De Niro (a gain of 0.82) or Akira Kurosawa and Toshirō Mifune (a gain of 0.58) clearly illustrate this trend. While these numbers confirm a statistical outperformance, they do not prove whether it stems from genuine creative chemistry or simply the selection of inherently stronger projects.
+
+From a methodological standpoint, this correlation does not demonstrate a direct causal link, as the success of an initial film could just as easily prompt a director to call the same actor again. To settle the matter, it would have been necessary to compare each film to a comparable work in terms of genre and era since year and genre data are available in the IMDb tables, unlike budgets produced without the actor in question. Furthermore, the project did not analyze the exact chronological order of the films, which would have helped determine whether quality precedes or follows the formation of the duo.
 
 ### Methodological explanation - Open question
 
