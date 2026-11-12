@@ -1113,15 +1113,11 @@ From a methodological standpoint, this correlation does not demonstrate a direct
 
 ### Methodological explanation - Open question
 
-<!-- TO WRITE. Points to cover:
-     - the baseline excludes the shared films, and why comparing a duo to the full career of its
-       members would have flattened the effect
-     - how that baseline is computed by difference of sums instead of one join per pair
-     - the thresholds: at least 3 films together, at least 1000 votes, lead billing only
-     - the limit of the result: a correlation is not a causality, a director calling back the
-       actor of a film that worked would produce the same numbers -->
+To present our approach on this open question, we relied on specific methodological choices to avoid flattening the results. First, the calculation of the reference score what each member of the duo does without the other  strictly excludes shared films. If we had used the full career, the duo's films would have been counted on both sides, completely crushing the gap. To do this cleanly and efficiently, the baseline does not go through a heavy pairwise join, but rather via a difference of sums: for an artist, we start from the total sum and total number of ratings, and subtract what was done with the other person. In our tables, the out-of-duo average (  apart_avg) thus combines the averages of each (for example, for Peter Jackson and Elijah Wood, the two averages of 7.38 and 6.09 give a baseline of 6.74)
 
----
+Regarding thresholds, the code sets strict limits to keep the data reliable. A duo is classified as recurring once they reach at least 3 films together (MIN_TOGETHER = 3). Each film must have at least 1,000 votes to avoid the noise of obscure ratings, and the analysis is restricted to actors appearing among the top three billing names, while the director is identified via title.crew. Finally, each person must have at least 3 films outside the duo for the comparison to make sense, and the scope is limited to feature films of at least 60 minutes. Two important technical details also prevented skewed results: deduplicating roles in title.principals  (otherwise shared films would be counted twice and make the baseline negative) and automatically excluding cases where the director and the actor are the same person.
+
+Despite these safeguards, the main limitation remains that correlation does not prove causality: observing a gain does not necessarily prove that the duo itself creates quality, especially since the 3-film threshold may simply select collaborations that have already worked out.
 
 ## Appendix - execution environment
 
